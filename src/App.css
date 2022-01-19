@@ -1,0 +1,53 @@
+html,
+body,
+#root,
+#app {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0px;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.large {
+  font-size: xx-large;
+}
+
+* {
+  position: relative;
+}
+
+.click {
+  cursor: pointer;
+}
+
+ol {
+  margin: 0px;
+}
+
+section {
+  margin: 0.5em 0;
+}
+
+input[type="number"] {
+  text-align: right;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+/* MATERIAL OVERRIDES */
+
+button span {
+  margin: 0 !important;
+}
