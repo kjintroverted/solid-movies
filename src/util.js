@@ -9,3 +9,5 @@ export const THEME = {
 }
 
 export const AppTheme = createContext(THEME)
+
+export const SEARCH_DELAY = 1000;

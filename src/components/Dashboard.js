@@ -6,6 +6,7 @@ import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
 import { appLogin, SaveState } from "solid-core/dist/pods";
 import styled from "styled-components";
 import { AppTheme, THEME } from "../util";
+import Search from "./Search";
 
 const Dashboard = ({ user, data }) => {
 
@@ -27,7 +28,7 @@ const Dashboard = ({ user, data }) => {
         }
       </HeaderBar>
       <Content>
-        Hello Movies!
+        <Search />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>
