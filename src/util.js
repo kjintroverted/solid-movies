@@ -11,3 +11,10 @@ export const THEME = {
 export const AppTheme = createContext(THEME)
 
 export const SEARCH_DELAY = 1000;
+const KEY = "9c3bca4";
+
+export async function searchMovies(q) {
+  let res = await fetch(`https://www.omdbapi.com/?apikey=${ KEY }&s=${ q }`);
+  let body = await res.json()
+  return body.Search ? body.Search : [];
+}
