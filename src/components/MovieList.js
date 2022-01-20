@@ -1,13 +1,14 @@
+import { Fab } from "@material-ui/core";
 import { Card, Column, Frame } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { THEME } from "../util";
 
 const MovieList = ({ movies }) => {
   return (
-    <Container wrap="wrap">
+    <Container>
       {
         movies.map(m => (
-          <Card className="movie" key={ m.id }>
+          <Card className="movie clickable" key={ m.id }>
             <Frame
               position='absolute'
               fit='cover'
@@ -20,6 +21,17 @@ const MovieList = ({ movies }) => {
             <Column height='9em' justify='flex-end'>
               <Title>{ m.data.Title }</Title>
             </Column>
+            <Action>
+              <Fab
+                size='large'
+                color='secondary'>
+                {
+                  m.rating.total ?
+                    <h1>{ m.rating.total }</h1>
+                    : <span className="material-icons">star_half</span>
+                }
+              </Fab>
+            </Action>
           </Card>
         ))
       }
@@ -31,6 +43,7 @@ export default MovieList;
 
 const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
   padding: 1em;
   *.movie {
     margin: .5em;
@@ -41,4 +54,10 @@ const Title = styled.h2`
   margin: 0px;
   padding: .1em;
   background: ${ THEME.primary }DD;
+`
+
+const Action = styled.span`
+  position: absolute;
+  top: -.2em;
+  right: -.2em;
 `
