@@ -63,9 +63,12 @@ const Search = ({ add, idList }) => {
                   rate
                 </Button>
                 <Spacer width=".3em" />
-                <Fab color="primary" onClick={ () => add(movie.imdbID) }>
+                <Fab
+                  disabled={ idList.includes(movie.imdbID) }
+                  color="primary"
+                  onClick={ () => add(movie.imdbID) }>
                   <span className='material-icons'>
-                    add
+                    { idList.includes(movie.imdbID) ? `check` : `add` }
                   </span>
                 </Fab>
               </Actions>
