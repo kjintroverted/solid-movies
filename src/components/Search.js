@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Box, CircularProgress, TextField } from '@material-ui/core';
+import { Box, Button, CircularProgress, Fab, TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { searchMovies, SEARCH_DELAY, THEME } from '../util';
-import { Card, CardHeader, Column, Icon, Row } from 'solid-core/dist/components/styled';
+import { Card, CardHeader, Column, Icon, Row, Spacer } from 'solid-core/dist/components/styled';
 
-const Search = () => {
+const Search = ({ add }) => {
 
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState("");
@@ -39,24 +39,36 @@ const Search = () => {
             endAdornment: !timer ? <Icon theme={ THEME } className="material-icons">check</Icon>
               : <Box><CircularProgress color='primary' /></Box>
           } }
-          placeholder='Search Movie...' />
+          placeholder='Search Movie...'
+        />
       </Background>
       <Row wrap="wrap" justify="space-around">
         {
           (query && !searchResults.length) &&
           <ErrorMsg>No matching titles found...</ErrorMsg>
         }
-        {
+        { // SHOW SEARCH RESULTS
           searchResults.map(movie => (
             <Card key={ movie.imdbID }>
               <Row>
-                {
+                { // SHOW STOCK IMAGE IF NO POSTER
                   movie.Poster !== "N/A" ?
                     <Poster width='100em' src={ movie.Poster } alt={ `${ movie.Title }-poster` } />
                     : <BigIcon className='material-icons'>theaters</BigIcon>
                 }
                 <CardHeader>{ movie.Title } ({ movie.Year })</CardHeader>
               </Row>
+              <Actions>
+                <Button color="secondary">
+                  rate
+                </Button>
+                <Spacer width=".3em" />
+                <Fab color="primary" onClick={ () => add(movie.imdbID) }>
+                  <span className='material-icons'>
+                    add
+                  </span>
+                </Fab>
+              </Actions>
             </Card>
           ))
         }
@@ -86,4 +98,11 @@ const Poster = styled.img`
 const BigIcon = styled.h1`
   font-size: 7em;
   text-shadow: 2px 2px 10px ${ THEME.primary };
+`
+
+const Actions = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: -.3em;
+  right: -.7em;
 `
