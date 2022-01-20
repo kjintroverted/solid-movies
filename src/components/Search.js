@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { searchMovies, SEARCH_DELAY, THEME } from '../util';
 import { Card, CardHeader, Column, Icon, Row, Spacer } from 'solid-core/dist/components/styled';
 
-const Search = ({ add }) => {
+const Search = ({ add, idList }) => {
 
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState("");
@@ -29,7 +29,7 @@ const Search = ({ add }) => {
   }, [query])
 
   return (
-    <Column width="100%" align="center">
+    <Column width="100%" height="none" align="center">
       <Background>
         <TextField
           fullWidth

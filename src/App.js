@@ -63,8 +63,8 @@ function App() {
   // SESSION CONFIRMED => GET DATA
   useEffect(() => {
     if (profile) {
-      // LOAD BUDGET DATASET
-      loadDataset(getDomain(user) + "/budget")
+      // LOAD MOVIE DATASET
+      loadDataset(getDomain(user) + "/movies")
         .then(data => {
           setThings(getThings(data))
         });

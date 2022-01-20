@@ -1,17 +1,60 @@
 import { Button, IconButton } from "@material-ui/core";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
 import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
-import { appLogin, SaveState } from "solid-core/dist/pods";
+import { appLogin, initThing, loadThing, nameFilter, SaveState } from "solid-core/dist/pods";
 import styled from "styled-components";
-import { AppTheme, THEME } from "../util";
+import { movieShape } from "../movieShape";
+import { AppTheme, getMovieData, THEME } from "../util";
+import MovieList from "./MovieList";
 import Search from "./Search";
 
 const Dashboard = ({ user, data }) => {
 
   const { queue, saveFromQ } = useContext(SaveState);
   const { mui } = useContext(AppTheme);
+
+  const [movies, updateMovies] = useState([]);
+
+  useEffect(() => {
+    if (!data) return
+    loadWatchList(data)
+      .then(loadAllMovieData)
+      .then(updateMovies)
+
+  }, [data]);
+
+  async function loadWatchList(things) {
+    // GET ALL MOVIE DATA
+    return await Promise.all(
+      things
+        .filter(nameFilter('movie'))
+        .map(t => loadThing(t.url, movieShape))
+    );
+  }
+
+  async function loadAllMovieData(list) {
+    // GET ALL MOVIE DATA
+    let res = [];
+    for (let i in list) {
+      let movie = list[i];
+      if (movie.data) {
+        res = [...res, movie]
+        continue
+      }
+      let data = await getMovieData(movie.id);
+      res = [...res, { ...movie, data }]
+    }
+    return res;
+  }
+
+  async function addMovie(id) {
+    let data = await getMovieData(id);
+    let movie = { id, data, rating: {}, tags: [] };
+    let thing = await initThing("movie", movie, movieShape)
+    updateMovies([...movies, { ...movie, thing }]);
+  }
 
   return (
     <Layout>
@@ -28,7 +71,8 @@ const Dashboard = ({ user, data }) => {
         }
       </HeaderBar>
       <Content>
-        <Search />
+        <Search idList={ movies.map(m => m.id) } add={ addMovie } />
+        <MovieList movies={ movies } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>
@@ -50,8 +94,6 @@ const Layout = styled.div`
 const Content = styled.div`
   background: ${ THEME.light };
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   grid-area: main;
 `

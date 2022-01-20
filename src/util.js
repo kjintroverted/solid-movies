@@ -18,3 +18,9 @@ export async function searchMovies(q) {
   let body = await res.json()
   return body.Search ? body.Search : [];
 }
+
+export async function getMovieData(id) {
+  let res = await fetch(`https://www.omdbapi.com/?apikey=${ KEY }&i=${ id }`);
+  let body = await res.json()
+  return body;
+}
