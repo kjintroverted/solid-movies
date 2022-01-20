@@ -1,14 +1,22 @@
 import { Fab } from "@material-ui/core";
+import { useEffect, useState } from "react";
 import { Card, Column, Frame } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { THEME } from "../util";
 
 const MovieList = ({ movies }) => {
+
+  const [displayList, setList] = useState([])
+
+  useEffect(() => {
+    setList(movies.sort((a, b) => a.data.Title.localeCompare(b.data.Title)))
+  }, [movies])
+
   return (
     <Container>
       {
-        movies.map(m => (
-          <Card className="movie clickable" key={ m.id }>
+        displayList.map(m => (
+          <Card className="movie" key={ m.id }>
             <Frame
               position='absolute'
               fit='cover'
