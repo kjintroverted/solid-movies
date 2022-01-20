@@ -10,7 +10,7 @@ export const THEME = {
 
 export const AppTheme = createContext(THEME)
 
-export const SEARCH_DELAY = 1000;
+export const SEARCH_DELAY = 500;
 const KEY = "9c3bca4";
 
 export async function searchMovies(q) {
