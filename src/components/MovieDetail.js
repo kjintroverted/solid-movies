@@ -1,12 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import { Frame, Spacer } from "solid-core/dist/components/styled";
 import styled from "styled-components";
-import { THEME } from "../util";
+import { overallScore, THEME } from "../util";
 import Scales from "./Scales";
 
 const MovieDetail = ({ movie, onUpdate, handleClose }) => {
 
   if (!movie) return <></>
+
+  let total = overallScore(movie.rating);
 
   function updateRatingValue(field) {
     return (_, val) => {
@@ -26,7 +28,7 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
           <img src={ movie.data.Poster } alt={ `${ movie.data.title } Poster` } />
         </Frame>
         <Ratings>
-          <Total>9.8</Total>
+          { total && <Total>{ total }</Total> }
           <Spacer />
           <Scales rating={ movie.rating } updateValue={ updateRatingValue } />
         </Ratings>
@@ -45,7 +47,7 @@ const Ratings = styled.div`
   top: 0;
   left: 0;
   width: 90%;
-  height: 100%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   `

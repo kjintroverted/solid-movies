@@ -13,6 +13,21 @@ export const AppTheme = createContext(THEME)
 export const SEARCH_DELAY = 500;
 const KEY = "9c3bca4";
 
+export function overallScore(rating) {
+  if (!rating.story
+    || !rating.character
+    || !rating.performance
+    || !rating.visuals
+    || !rating.soundtrack
+  ) return null;
+  let res = (
+    rating.story
+    + (rating.character + rating.performance) / 2
+    + (rating.visuals + rating.soundtrack) / 2
+  ) / 3;
+  return Math.round(res * 10) / 10;
+}
+
 export async function searchMovies(q) {
   let res = await fetch(`https://www.omdbapi.com/?apikey=${ KEY }&s=${ q }`);
   let body = await res.json()
