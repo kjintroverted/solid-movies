@@ -4,7 +4,7 @@ import { Card, Column, Frame } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { THEME } from "../util";
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, onSelect }) => {
 
   const [displayList, setList] = useState([])
 
@@ -31,6 +31,7 @@ const MovieList = ({ movies }) => {
             </Column>
             <Action>
               <Fab
+                onClick={ () => onSelect(m) }
                 size='large'
                 color='secondary'>
                 {

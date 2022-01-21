@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@material-ui/core";
+import { Button, Dialog, DialogContent, IconButton } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
@@ -7,6 +7,7 @@ import { appLogin, initThing, loadThing, nameFilter, SaveState } from "solid-cor
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
+import MovieDetail from "./MovieDetail";
 import MovieList from "./MovieList";
 import Search from "./Search";
 
@@ -16,6 +17,7 @@ const Dashboard = ({ user, data }) => {
   const { mui } = useContext(AppTheme);
 
   const [movies, updateMovies] = useState([]);
+  const [detail, setDetail] = useState(null);
 
   useEffect(() => {
     if (!data) return
@@ -72,7 +74,8 @@ const Dashboard = ({ user, data }) => {
       </HeaderBar>
       <Content>
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
-        <MovieList movies={ movies } />
+        <MovieList movies={ movies } onSelect={ setDetail } />
+        <MovieDetail movie={ detail } handleClose={ () => setDetail(null) } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>
