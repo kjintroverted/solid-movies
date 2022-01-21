@@ -2,7 +2,7 @@ import { Fab } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Card, Column, Frame } from "solid-core/dist/components/styled"
 import styled from "styled-components";
-import { THEME } from "../util";
+import { overallScore, THEME } from "../util";
 
 const MovieList = ({ movies, onSelect }) => {
 
@@ -35,9 +35,9 @@ const MovieList = ({ movies, onSelect }) => {
                 size='large'
                 color='secondary'>
                 {
-                  m.rating.total ?
-                    <h1>{ m.rating.total }</h1>
-                    : <span className="material-icons">star_half</span>
+                  overallScore(m.rating) ?
+                    <Rate>{ overallScore(m.rating) }</Rate>
+                    : <Rate className="material-icons">star_half</Rate>
                 }
               </Fab>
             </Action>
@@ -63,6 +63,10 @@ const Title = styled.h2`
   margin: 0px;
   padding: .1em;
   background: ${ THEME.primary }DD;
+`
+
+const Rate = styled.h1`
+  color: ${ THEME.dark };
 `
 
 const Action = styled.span`
