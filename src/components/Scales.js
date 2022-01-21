@@ -1,7 +1,7 @@
 import { Slider } from '@material-ui/core';
 import { CardHeader, Row, Spacer } from 'solid-core/dist/components/styled';
 import styled from 'styled-components';
-import { THEME } from '../util';
+import { RATINGS, THEME } from '../util';
 
 const Scales = ({ rating, updateValue }) => {
   return (
@@ -19,6 +19,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.story ? rating.story : '-' }</Value>
         </Row>
+        <HelperText>{ rating.story ? RATINGS.story[rating.story - 1] : '' }</HelperText>
       </Section>
       {/* CHARACTER */ }
       <Section>
@@ -33,6 +34,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.character ? rating.character : '-' }</Value>
         </Row>
+        <HelperText>{ rating.character ? RATINGS.character[rating.character - 1] : '' }</HelperText>
       </Section>
       {/* PERFORMANCE */ }
       <Section>
@@ -47,6 +49,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.performance ? rating.performance : '-' }</Value>
         </Row>
+        <HelperText>{ rating.performance ? RATINGS.performance[rating.performance - 1] : '' }</HelperText>
       </Section>
       {/* VISUALS */ }
       <Section>
@@ -61,6 +64,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.visuals ? rating.visuals : '-' }</Value>
         </Row>
+        <HelperText>{ rating.visuals ? RATINGS.visuals[rating.visuals - 1] : '' }</HelperText>
       </Section>
       {/* SOUNDTRACK */ }
       <Section>
@@ -75,6 +79,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.soundtrack ? rating.soundtrack : '-' }</Value>
         </Row>
+        <HelperText>{ rating.soundtrack ? RATINGS.soundtrack[rating.soundtrack - 1] : '' }</HelperText>
       </Section>
     </Container>
   )
@@ -85,9 +90,10 @@ export default Scales;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${ THEME.dark };
+  background: ${ THEME.dark }EE;
   width: 100%;
   align-items: center;
+  box-shadow: 2px 2px 10px ${ THEME.primary }EE;
 `
 
 const Section = styled.div`
@@ -96,4 +102,11 @@ const Section = styled.div`
 
 const Value = styled.h2`
   width: 1em;
+`
+
+const HelperText = styled.p`
+  margin-top: 0;
+  font-size: small;
+  padding-left: 1em;
+  opacity: .7;
 `
