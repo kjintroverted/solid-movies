@@ -1,9 +1,9 @@
-import { Button, Dialog, DialogContent, IconButton } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
 import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
-import { appLogin, initThing, loadThing, nameFilter, SaveState } from "solid-core/dist/pods";
+import { addToUpdateQueue, appLogin, initThing, loadThing, nameFilter, SaveState, setAttr } from "solid-core/dist/pods";
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
@@ -13,7 +13,7 @@ import Search from "./Search";
 
 const Dashboard = ({ user, data }) => {
 
-  const { queue, saveFromQ } = useContext(SaveState);
+  const { queue, updateQueue, saveFromQ } = useContext(SaveState);
   const { mui } = useContext(AppTheme);
 
   const [movies, updateMovies] = useState([]);
@@ -58,6 +58,15 @@ const Dashboard = ({ user, data }) => {
     updateMovies([...movies, { ...movie, thing }]);
   }
 
+  function updateMovie(updatedMovie) {
+    let thing = setAttr(updatedMovie.thing, movieShape.rating, updatedMovie.rating);
+    updatedMovie.thing = thing;
+    updateQueue(addToUpdateQueue(queue, thing))
+    let i = movies.findIndex(m => m.id === updatedMovie.id);
+    updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
+    setDetail(updatedMovie)
+  }
+
   return (
     <Layout>
       <HeaderBar theme={ THEME }>
@@ -75,7 +84,7 @@ const Dashboard = ({ user, data }) => {
       <Content>
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
         <MovieList movies={ movies } onSelect={ setDetail } />
-        <MovieDetail movie={ detail } handleClose={ () => setDetail(null) } />
+        <MovieDetail movie={ detail } onUpdate={ updateMovie } handleClose={ () => setDetail(null) } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>

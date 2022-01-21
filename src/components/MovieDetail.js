@@ -1,9 +1,19 @@
-import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
-import { Frame } from "solid-core/dist/components/styled";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
+import { Frame, Spacer } from "solid-core/dist/components/styled";
 import styled from "styled-components";
+import { THEME } from "../util";
+import Scales from "./Scales";
 
 const MovieDetail = ({ movie, onUpdate, handleClose }) => {
+
   if (!movie) return <></>
+
+  function updateRatingValue(field) {
+    return (_, val) => {
+      onUpdate({ ...movie, rating: { ...movie.rating, [field]: +val } })
+    }
+  }
+
   return (
     <Dialog open={ true } onClose={ handleClose }>
       <DialogTitle>{ movie.data.Title }</DialogTitle>
@@ -15,14 +25,37 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
         >
           <img src={ movie.data.Poster } alt={ `${ movie.data.title } Poster` } />
         </Frame>
+        <Ratings>
+          <Total>9.8</Total>
+          <Spacer />
+          <Scales rating={ movie.rating } updateValue={ updateRatingValue } />
+        </Ratings>
       </DialogContent>
+      <DialogActions>
+        <Button href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
+      </DialogActions>
     </Dialog>
   )
 }
 
 export default MovieDetail;
 
-const Page = styled.div`
+const Ratings = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 90%;
-  max-width: 650px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  `
+
+const Total = styled.span`
+  font-size: 5em;
+  align-self: flex-end;
+  background: ${ THEME.primary };
+  color: ${ THEME.dark };
+  padding: .1em;
+  text-shadow: 1px 1px 5px ${ THEME.light }70;
+  box-shadow: 2px 2px 10px ${ THEME.light }DD;
 `
