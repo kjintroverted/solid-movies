@@ -13,50 +13,50 @@ const MovieList = ({ movies, onSelect }) => {
   }, [movies])
 
   return (
-    <Container>
-      {
-        displayList.map(m => (
-          <Card className="movie" key={ m.id }>
-            <Frame
-              position='absolute'
-              fit='cover'
-              top='0' left='0'
-              width='100%' height='10em'
-              focusX='center' focusY='15%'
-            >
-              <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
-            </Frame>
-            <Column height='9em' justify='flex-end'>
-              <Title>{ m.data.Title }</Title>
-            </Column>
-            <Action>
-              <Fab
-                onClick={ () => onSelect(m) }
-                size='large'
-                color='secondary'>
-                {
-                  overallScore(m.rating) ?
-                    <Rate>{ overallScore(m.rating) }</Rate>
-                    : <Rate className="material-icons">star_half</Rate>
-                }
-              </Fab>
-            </Action>
-          </Card>
-        ))
-      }
-    </Container>
+    <div style={ { display: 'flex', justifyContent: 'center' } }>
+      <Container>
+        {
+          displayList.map(m => (
+            <Card key={ m.id }>
+              <Frame
+                position='absolute'
+                fit='cover'
+                top='0' left='0'
+                width='100%' height='10em'
+                focusX='center' focusY='15%'
+              >
+                <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
+              </Frame>
+              <Column height='9em' justify='flex-end'>
+                <Title>{ m.data.Title }</Title>
+              </Column>
+              <Action>
+                <Fab
+                  onClick={ () => onSelect(m) }
+                  size='large'
+                  color='secondary'>
+                  {
+                    overallScore(m.rating) ?
+                      <Rate>{ overallScore(m.rating) }</Rate>
+                      : <Rate className="material-icons">star_half</Rate>
+                  }
+                </Fab>
+              </Action>
+            </Card>
+          ))
+        }
+      </Container>
+    </div>
   )
 }
 
 export default MovieList;
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
+  max-width: 1500px;
   padding: 1em;
-  *.movie {
-    margin: .5em;
-  }
 `
 
 const Title = styled.h2`
