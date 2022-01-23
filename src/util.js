@@ -29,6 +29,14 @@ export function overallScore(rating) {
   return Math.round(res * 10) / 10;
 }
 
+export const sortRating = () => {
+  return (a, b) => (
+    !overallScore(a.rating) ? 1
+      : !overallScore(b.rating) ? -1
+        : overallScore(b.rating) - overallScore(a.rating)
+  )
+}
+
 export const RATINGS = {
   story: [
     `I'm staring at a blank screen`,

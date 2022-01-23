@@ -2,14 +2,14 @@ import { Fab } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Card, Column, Frame } from "solid-core/dist/components/styled"
 import styled from "styled-components";
-import { overallScore, THEME } from "../util";
+import { overallScore, sortRating, THEME } from "../util";
 
 const MovieList = ({ movies, onSelect }) => {
 
   const [displayList, setList] = useState([])
 
   useEffect(() => {
-    setList(movies.sort((a, b) => a.data.Title.localeCompare(b.data.Title)))
+    setList(movies.sort(sortRating()))
   }, [movies])
 
   return (
