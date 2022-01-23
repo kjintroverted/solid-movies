@@ -55,6 +55,7 @@ export default MovieList;
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
+  width: 95%;
   max-width: 1500px;
   padding: 1em;
 `

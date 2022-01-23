@@ -3,7 +3,7 @@ import { CardHeader, Row, Spacer } from 'solid-core/dist/components/styled';
 import styled from 'styled-components';
 import { RATINGS, THEME } from '../util';
 
-const Scales = ({ rating, updateValue }) => {
+const Scales = ({ rating, updateValue, helper }) => {
   return (
     <Container>
       {/* STORY */ }
@@ -19,7 +19,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.story ? rating.story : '-' }</Value>
         </Row>
-        <HelperText>{ rating.story ? RATINGS.story[rating.story - 1] : '' }</HelperText>
+        { helper && <HelperText>{ rating.story ? RATINGS.story[rating.story - 1] : '' }</HelperText> }
       </Section>
       {/* CHARACTER */ }
       <Section>
@@ -34,7 +34,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.character ? rating.character : '-' }</Value>
         </Row>
-        <HelperText>{ rating.character ? RATINGS.character[rating.character - 1] : '' }</HelperText>
+        { helper && <HelperText>{ rating.character ? RATINGS.character[rating.character - 1] : '' }</HelperText> }
       </Section>
       {/* PERFORMANCE */ }
       <Section>
@@ -49,7 +49,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.performance ? rating.performance : '-' }</Value>
         </Row>
-        <HelperText>{ rating.performance ? RATINGS.performance[rating.performance - 1] : '' }</HelperText>
+        { helper && <HelperText>{ rating.performance ? RATINGS.performance[rating.performance - 1] : '' }</HelperText> }
       </Section>
       {/* VISUALS */ }
       <Section>
@@ -64,7 +64,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.visuals ? rating.visuals : '-' }</Value>
         </Row>
-        <HelperText>{ rating.visuals ? RATINGS.visuals[rating.visuals - 1] : '' }</HelperText>
+        { helper && <HelperText>{ rating.visuals ? RATINGS.visuals[rating.visuals - 1] : '' }</HelperText> }
       </Section>
       {/* SOUNDTRACK */ }
       <Section>
@@ -79,7 +79,7 @@ const Scales = ({ rating, updateValue }) => {
           <Spacer width='.5em' />
           <Value>{ rating.soundtrack ? rating.soundtrack : '-' }</Value>
         </Row>
-        <HelperText>{ rating.soundtrack ? RATINGS.soundtrack[rating.soundtrack - 1] : '' }</HelperText>
+        { helper && <HelperText>{ rating.soundtrack ? RATINGS.soundtrack[rating.soundtrack - 1] : '' }</HelperText> }
       </Section>
     </Container>
   )

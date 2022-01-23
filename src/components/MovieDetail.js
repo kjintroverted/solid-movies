@@ -1,10 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
+import { useState } from "react";
 import { Frame, Spacer } from "solid-core/dist/components/styled";
 import styled from "styled-components";
 import { overallScore, THEME } from "../util";
 import Scales from "./Scales";
 
 const MovieDetail = ({ movie, onUpdate, handleClose }) => {
+
+  const [show, setShow] = useState(false);
 
   if (!movie) return <></>
 
@@ -30,11 +33,12 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
         <Ratings>
           { total && <Total>{ total }</Total> }
           <Spacer />
-          <Scales rating={ movie.rating } updateValue={ updateRatingValue } />
+          <Scales rating={ movie.rating } updateValue={ updateRatingValue } helper={ show } />
         </Ratings>
       </DialogContent>
       <DialogActions>
-        <Button href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
+        <Button onClick={ () => setShow(!show) }>{ show ? 'Hide' : 'Show' } Explanation</Button>
+        <Button variant='contained' href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
       </DialogActions>
     </Dialog>
   )
