@@ -38,7 +38,7 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={ () => setShow(!show) }>{ show ? 'Hide' : 'Show' } Explanation</Button>
-        <Button variant='contained' href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
+        <Button variant='contained' color='secondary' href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
       </DialogActions>
     </Dialog>
   )

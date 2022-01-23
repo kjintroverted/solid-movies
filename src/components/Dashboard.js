@@ -7,6 +7,7 @@ import { addToUpdateQueue, appLogin, initThing, loadThing, nameFilter, SaveState
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
+import Loading from "./Loading";
 import MovieDetail from "./MovieDetail";
 import MovieList from "./MovieList";
 import Search from "./Search";
@@ -16,16 +17,19 @@ const Dashboard = ({ user, data }) => {
   const { queue, updateQueue, saveFromQ } = useContext(SaveState);
   const { mui } = useContext(AppTheme);
 
+  const [loading, setLoading] = useState(false);
   const [movies, updateMovies] = useState([]);
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
     if (!data) return
+    setLoading(true)
     loadWatchList(data)
       .then(loadAllMovieData)
       .then(updateMovies)
-
   }, [data]);
+
+  useEffect(() => setLoading(false), [movies])
 
   async function loadWatchList(things) {
     // GET ALL MOVIE DATA
@@ -83,6 +87,7 @@ const Dashboard = ({ user, data }) => {
       </HeaderBar>
       <Content>
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
+        <Loading loading={ loading } />
         <MovieList movies={ movies } onSelect={ setDetail } />
         <MovieDetail movie={ detail } onUpdate={ updateMovie } handleClose={ () => setDetail(null) } />
       </Content>
