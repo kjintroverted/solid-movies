@@ -7,7 +7,7 @@ import Scales from "./Scales";
 
 const MovieDetail = ({ movie, onUpdate, handleClose }) => {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   if (!movie) return <></>
 
