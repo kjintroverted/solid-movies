@@ -1,21 +1,33 @@
-import { Fab, TextField } from "@material-ui/core";
+import { Button, Fab, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Card, Column, Frame, Row, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { overallScore, sortRating, THEME } from "../util";
 import ChipField from './ChipField';
 
+const RATE_FILTERS = [
+  'ALL',
+  'UNRATED',
+  'RATED'
+];
+
 const MovieList = ({ movies, onSelect, onUpdate }) => {
 
   const [displayList, setList] = useState([])
   const [focus, setFocus] = useState(null)
-  const [filter, setFilter] = useState('')
+  const [tagFilter, setTagFilter] = useState('')
+  const [rateFilter, setRateFilter] = useState(0)
+  const [sort, setSort] = useState(1)
 
   useEffect(() => {
     setList(movies
-      .filter(m => !filter || m.tags.findIndex(t => t.toLowerCase().indexOf(filter.toLowerCase()) >= 0) >= 0)
-      .sort(sortRating()))
-  }, [movies, filter])
+      .filter(m => !rateFilter
+        || (rateFilter === 1 && !overallScore(m.rating))
+        || (rateFilter === 2 && !!overallScore(m.rating)))
+      .filter(m => !tagFilter
+        || m.tags.findIndex(t => t.toLowerCase().indexOf(tagFilter.toLowerCase()) >= 0) >= 0)
+      .sort(sortRating(sort)))
+  }, [movies, tagFilter, rateFilter, sort])
 
   function addTag(movie) {
     return (tag) => {
@@ -40,13 +52,24 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
       <Spacer height='1em' />
       <Row width='90%' align='center'>
         <Background>
-          <TextField variant='filled' fullWidth placeholder='filter tag' onChange={ e => setFilter(e.target.value) } />
+          <TextField variant='filled' fullWidth placeholder='filter tag' onChange={ e => setTagFilter(e.target.value) } />
         </Background>
         <Spacer />
+        <Button
+          variant="outlined"
+          color='secondary'
+          style={ { margin: '0em .2em', width: 100 } }
+          onClick={ () => rateFilter + 1 >= RATE_FILTERS.length ? setRateFilter(0) : setRateFilter(rateFilter + 1) }
+        >
+          { RATE_FILTERS[rateFilter] }
+        </Button>
         <Fab
           size='small'
-          color='secondary'>
-          <span className='material-icons'>arrow_downward</span>
+          color='secondary'
+          style={ { margin: '0em .2em' } }
+          onClick={ () => setSort(sort * -1) }
+        >
+          <span className='material-icons'>{ sort > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
         </Fab>
       </Row>
       <Container>

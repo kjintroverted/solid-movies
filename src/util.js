@@ -29,11 +29,11 @@ export function overallScore(rating) {
   return Math.round(res * 10) / 10;
 }
 
-export const sortRating = () => {
+export const sortRating = (factor) => {
   return (a, b) => (
     !overallScore(a.rating) ? 1
       : !overallScore(b.rating) ? -1
-        : overallScore(b.rating) - overallScore(a.rating)
+        : (overallScore(b.rating) - overallScore(a.rating)) * factor
   )
 }
 
