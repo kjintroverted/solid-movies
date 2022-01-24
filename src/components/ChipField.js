@@ -20,7 +20,8 @@ function ChipField({ data, onSubmit, onDelete }) {
       <TextField
         color="primary"
         fullWidth
-        // placeholder="add tag..."
+        style={ { opacity: .5 } }
+        placeholder="add tag..."
         value={ value }
         onChange={ e => setValue(e.target.value) }
         onKeyDown={ checkReturn } />

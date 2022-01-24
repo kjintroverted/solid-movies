@@ -31,34 +31,36 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
       <Container>
         {
           displayList.map(m => (
-            <Card key={ m.id }>
-              <Frame
-                position='absolute'
-                fit='cover'
-                top='0' left='0'
-                width='100%' height='10em'
-                focusX='center' focusY='15%'
-              >
-                <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
-              </Frame>
-              <Column height='9em' justify='flex-end'>
-                <Title>{ m.data.Title }</Title>
-              </Column>
-              <Action>
-                <Fab
-                  onClick={ () => onSelect(m) }
-                  size='large'
-                  color='secondary'>
-                  {
-                    overallScore(m.rating) ?
-                      <Rate>{ overallScore(m.rating) }</Rate>
-                      : <Rate className="material-icons">star_half</Rate>
-                  }
-                </Fab>
-              </Action>
-              <Spacer height='.7em' />
-              <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } />
-            </Card>
+            <Column justify='flex-start' width='100%'>
+              <Card key={ m.id }>
+                <Frame
+                  position='absolute'
+                  fit='cover'
+                  top='0' left='0'
+                  width='100%' height='10em'
+                  focusX='center' focusY='15%'
+                >
+                  <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
+                </Frame>
+                <Column height='9em' justify='flex-end'>
+                  <Title>{ m.data.Title }</Title>
+                </Column>
+                <Action>
+                  <Fab
+                    onClick={ () => onSelect(m) }
+                    size='large'
+                    color='secondary'>
+                    {
+                      overallScore(m.rating) ?
+                        <Rate>{ overallScore(m.rating) }</Rate>
+                        : <Rate className="material-icons">star_half</Rate>
+                    }
+                  </Fab>
+                </Action>
+                <Spacer height='.7em' />
+                <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } />
+              </Card>
+            </Column>
           ))
         }
       </Container>
