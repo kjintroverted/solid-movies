@@ -1,6 +1,6 @@
-import { Fab } from "@material-ui/core";
+import { Fab, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { Card, Column, Frame, Spacer } from "solid-core/dist/components/styled"
+import { Card, Column, Frame, Row, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { overallScore, sortRating, THEME } from "../util";
 import ChipField from './ChipField';
@@ -9,10 +9,13 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
 
   const [displayList, setList] = useState([])
   const [focus, setFocus] = useState(null)
+  const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    setList(movies.sort(sortRating()))
-  }, [movies])
+    setList(movies
+      .filter(m => !filter || m.tags.findIndex(t => t.toLowerCase().indexOf(filter.toLowerCase()) >= 0) >= 0)
+      .sort(sortRating()))
+  }, [movies, filter])
 
   function addTag(movie) {
     return (tag) => {
@@ -33,7 +36,19 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   }
 
   return (
-    <div style={ { display: 'flex', justifyContent: 'center' } }>
+    <Column align='center'>
+      <Spacer height='1em' />
+      <Row width='90%' align='center'>
+        <Background>
+          <TextField variant='filled' fullWidth placeholder='filter tag' onChange={ e => setFilter(e.target.value) } />
+        </Background>
+        <Spacer />
+        <Fab
+          size='small'
+          color='secondary'>
+          <span className='material-icons'>arrow_downward</span>
+        </Fab>
+      </Row>
       <Container>
         {
           displayList.map(m => (
@@ -70,7 +85,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
           ))
         }
       </Container>
-    </div>
+    </Column>
   )
 }
 
@@ -80,7 +95,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
   width: 95%;
-  padding: 1em;
+  padding: 0em 1em;
   * {
     justify-self: center;
   }
@@ -100,4 +115,12 @@ const Action = styled.span`
   position: absolute;
   top: -.2em;
   right: -.2em;
+`
+
+const Background = styled.div`
+  background: ${ THEME.dark };
+  border-radius: .3em;
+  width: 30%;
+  min-width: 200px;
+  max-width: 30em;
 `

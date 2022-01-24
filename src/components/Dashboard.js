@@ -89,8 +89,8 @@ const Dashboard = ({ user, data }) => {
       </HeaderBar>
       <Content>
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
-        <Loading loading={ loading } />
         <MovieList movies={ movies } onSelect={ setDetail } onUpdate={ updateMovie('tags') } />
+        <Loading loading={ loading } />
         <MovieDetail movie={ detail } onUpdate={ updateMovie('rating', setDetail) } handleClose={ () => setDetail(null) } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />

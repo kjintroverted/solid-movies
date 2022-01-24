@@ -1,6 +1,7 @@
 import { Chip, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { Row } from "solid-core";
+import { Spacer } from "solid-core/dist/components/styled";
 import { THEME } from "../util";
 
 function ChipField({ data, onSubmit, onDelete, showForm }) {
@@ -16,14 +17,18 @@ function ChipField({ data, onSubmit, onDelete, showForm }) {
   return (
     <Row wrap="wrap">
       {
-        data.map(d => <Chip
-          key={ d }
-          onDelete={ () => onDelete(d) }
-          color="secondary"
-          label={ d }
-          size="small"
-          style={ { marginBottom: '.2em', color: THEME.dark } } />
-        )
+        data.map(d => (
+          <>
+            <Chip
+              key={ d }
+              onDelete={ () => onDelete(d) }
+              color="secondary"
+              label={ d }
+              size="small"
+              style={ { marginBottom: '.2em', color: THEME.dark } } />
+            <Spacer width='.2em' />
+          </>
+        ))
       }
       {
         showForm &&
