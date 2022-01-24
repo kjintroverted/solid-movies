@@ -1,16 +1,30 @@
 import { Fab } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { Card, Column, Frame } from "solid-core/dist/components/styled"
+import { Card, Column, Frame, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { overallScore, sortRating, THEME } from "../util";
+import ChipField from './ChipField';
 
-const MovieList = ({ movies, onSelect }) => {
+const MovieList = ({ movies, onSelect, onUpdate }) => {
 
   const [displayList, setList] = useState([])
 
   useEffect(() => {
     setList(movies.sort(sortRating()))
   }, [movies])
+
+  function addTag(movie) {
+    return (tag) => {
+      onUpdate({ ...movie, tags: [...movie.tags, tag] })
+    }
+  }
+
+  function removeTag(movie) {
+    return (tag) => {
+      let i = movie.tags.indexOf(tag);
+      onUpdate({ ...movie, tags: [...movie.tags.slice(0, i), ...movie.tags.slice(i + 1)] });
+    }
+  }
 
   return (
     <div style={ { display: 'flex', justifyContent: 'center' } }>
@@ -42,6 +56,8 @@ const MovieList = ({ movies, onSelect }) => {
                   }
                 </Fab>
               </Action>
+              <Spacer height='.7em' />
+              <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } />
             </Card>
           ))
         }

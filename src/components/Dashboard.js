@@ -62,13 +62,15 @@ const Dashboard = ({ user, data }) => {
     updateMovies([...movies, { ...movie, data }]);
   }
 
-  function updateMovie(updatedMovie) {
-    let thing = setAttr(updatedMovie.thing, movieShape.rating, updatedMovie.rating);
-    updatedMovie.thing = thing;
-    updateQueue(addToUpdateQueue(queue, thing))
-    let i = movies.findIndex(m => m.id === updatedMovie.id);
-    updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
-    setDetail(updatedMovie)
+  function updateMovie(field, then) {
+    return (updatedMovie) => {
+      let thing = setAttr(updatedMovie.thing, movieShape[field], updatedMovie[field]);
+      updatedMovie.thing = thing;
+      updateQueue(addToUpdateQueue(queue, thing))
+      let i = movies.findIndex(m => m.id === updatedMovie.id);
+      updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
+      if (then) then(updateMovie);
+    }
   }
 
   return (
@@ -88,8 +90,8 @@ const Dashboard = ({ user, data }) => {
       <Content>
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
         <Loading loading={ loading } />
-        <MovieList movies={ movies } onSelect={ setDetail } />
-        <MovieDetail movie={ detail } onUpdate={ updateMovie } handleClose={ () => setDetail(null) } />
+        <MovieList movies={ movies } onSelect={ setDetail } onUpdate={ updateMovie('tags') } />
+        <MovieDetail movie={ detail } onUpdate={ updateMovie('rating', setDetail) } handleClose={ () => setDetail(null) } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>
