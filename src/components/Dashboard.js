@@ -69,7 +69,7 @@ const Dashboard = ({ user, data }) => {
       updateQueue(addToUpdateQueue(queue, thing))
       let i = movies.findIndex(m => m.id === updatedMovie.id);
       updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
-      if (then) then(updateMovie);
+      if (then) then(updatedMovie);
     }
   }
 
