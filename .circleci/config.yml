@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: kjintroverted/go-node
+    working_directory: ~/solid-movies
+    steps:
+      - checkout
+      - run: npm i
+      # Add Tests
+      - run: npm run build
+
+  deploy:
+    docker:
+      - image: kjintroverted/go-node
+    working_directory: ~/solid-movies
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "b3:68:35:4c:78:23:75:ba:39:bb:ff:49:62:dd:3f:c3"
+      - run: npm i
+      - run: npm i surge
+      - run: npm run build
+      - run: rm -rf .git
+      - run: echo "https://movies.wkgreen.dev" > ./build/CNAME
+      - run: cp -r .circleci build
+      - run: cd build && git init
+      - run: cd build && git remote add origin git@github.com:kjintroverted/solid-movies.git
+      - run: cd build && git checkout -b gh-pages
+      - run: cd build && git add .
+      - run: cd build && git config user.email "wkgreen13@gmail.com"
+      - run: cd build && git config user.name "CircleCI"
+      - run: cd build && git commit -m "CI Deploy"
+      - run: cd build && git push -uf origin gh-pages
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: gh-pages
+      - deploy:
+          filters:
+            branches:
+              only: master
