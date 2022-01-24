@@ -58,8 +58,8 @@ const Dashboard = ({ user, data }) => {
   async function addMovie(id) {
     let data = await getMovieData(id);
     let movie = { id, data, rating: {}, tags: [] };
-    let thing = await initThing("movie", movie, movieShape)
-    updateMovies([...movies, { ...movie, thing }]);
+    movie = await initThing("movie", movie, movieShape)
+    updateMovies([...movies, { ...movie, data }]);
   }
 
   function updateMovie(updatedMovie) {
