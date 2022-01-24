@@ -8,6 +8,7 @@ import ChipField from './ChipField';
 const MovieList = ({ movies, onSelect, onUpdate }) => {
 
   const [displayList, setList] = useState([])
+  const [focus, setFocus] = useState(null)
 
   useEffect(() => {
     setList(movies.sort(sortRating()))
@@ -26,13 +27,18 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
     }
   }
 
+  function toggleFocus(id) {
+    if (id !== focus) setFocus(id)
+    else setFocus(null)
+  }
+
   return (
     <div style={ { display: 'flex', justifyContent: 'center' } }>
       <Container>
         {
           displayList.map(m => (
-            <Column justify='flex-start' width='100%'>
-              <Card key={ m.id }>
+            <Column justify='flex-start' align='center' width='100%'>
+              <Card className="clickable" key={ m.id } onClick={ () => toggleFocus(m.id) }>
                 <Frame
                   position='absolute'
                   fit='cover'
@@ -57,8 +63,8 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                     }
                   </Fab>
                 </Action>
-                <Spacer height='.7em' />
-                <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } />
+                <Spacer height='1em' />
+                <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } showForm={ focus === m.id } />
               </Card>
             </Column>
           ))
