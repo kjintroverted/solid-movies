@@ -134,7 +134,9 @@ const Container = styled.div`
 const Title = styled.h2`
   margin: 0px;
   padding: .1em;
-  background: ${ THEME.primary }DD;
+  background: ${ THEME.primary }CC;
+  color: ${ THEME.light };
+  border-radius: 2px;
 `
 
 const Rate = styled.h1`
