@@ -27,6 +27,7 @@ function App() {
   const [user, setUser] = useState();
   const [things, setThings] = useState();
   const [queue, updateQueue] = useState([]);
+  const [dataset, setDataset] = useState(null);
   // PROFILE STATE
   const [profile, setProfile] = useState();
   const [edit, toggleEdit] = useState(false);
@@ -66,13 +67,14 @@ function App() {
       // LOAD MOVIE DATASET
       loadDataset(getDomain(user) + "/movies")
         .then(data => {
+          setDataset(data)
           setThings(getThings(data))
         });
     }
   }, [profile, user])
 
   return (
-    <SaveState.Provider value={ { queue, updateQueue, saveFromQ } }>
+    <SaveState.Provider value={ { queue, updateQueue, saveFromQ, dataset } }>
       <AppTheme.Provider value={ { ...THEME, mui } }>
         <mui.ThemeProvider theme={ muiTheme }>
           <Main>
