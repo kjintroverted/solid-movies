@@ -88,7 +88,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                   position='absolute'
                   fit='cover'
                   top='0' left='0'
-                  width='100%' height='15em'
+                  width='100%' height='20em'
                   focusX='center' focusY='15%'
                 >
                   <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
