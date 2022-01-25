@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, Fab, TextField } from '@material-ui/core';
+import { Box, CircularProgress, Fab, TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { searchMovies, SEARCH_DELAY, THEME } from '../util';
 import { Card, CardHeader, Column, Icon, Row, Spacer } from 'solid-core/dist/components/styled';

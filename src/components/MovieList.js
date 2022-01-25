@@ -58,14 +58,14 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
     <Column align='center'>
       <Spacer height='1em' />
       <Row width='90%' align='center'>
-        <Background>
-          <TextField variant='filled' fullWidth placeholder='filter tag' onChange={ e => setTagFilter(e.target.value) } />
-        </Background>
         <Spacer />
+        <Background>
+          <TextField fullWidth placeholder='filter by tag' onChange={ e => setTagFilter(e.target.value) } />
+        </Background>
         <Button
           variant="outlined"
           color='secondary'
-          style={ { margin: '0em .2em', width: 100 } }
+          style={ { margin: '0em .5em', width: 100 } }
           onClick={ () => rateFilter + 1 >= RATE_FILTERS.length ? setRateFilter(0) : setRateFilter(rateFilter + 1) }
         >
           { RATE_FILTERS[rateFilter] }
@@ -150,7 +150,9 @@ const Action = styled.span`
 `
 
 const Background = styled.div`
-  background: ${ THEME.dark };
+  background: ${ THEME.dark }EE;
+  padding: .2em;
+  margin: 0em .3em;
   border-radius: .3em;
   width: 30%;
   min-width: 200px;
