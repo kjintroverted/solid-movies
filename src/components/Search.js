@@ -59,9 +59,6 @@ const Search = ({ add, idList }) => {
                 <CardHeader>{ movie.Title } ({ movie.Year })</CardHeader>
               </Row>
               <Actions>
-                <Button color="secondary">
-                  rate
-                </Button>
                 <Spacer width=".3em" />
                 <Fab
                   disabled={ idList.includes(movie.imdbID) }
