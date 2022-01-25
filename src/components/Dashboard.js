@@ -76,7 +76,7 @@ const Dashboard = ({ user, data }) => {
   return (
     <Layout>
       <HeaderBar theme={ THEME }>
-        <h2>{ user ? `${ user.firstName }'s` : "My" } Movies</h2>
+        <h2>{ user && user.nickname ? `${ user.nickname }'s` : user && user.name ? `${ user.name }'s` : "My" } Movies</h2>
         <Spacer />
         {
           user ?
