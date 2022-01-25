@@ -1,5 +1,5 @@
 import { Slider } from '@material-ui/core';
-import { CardHeader, Row, Spacer } from 'solid-core/dist/components/styled';
+import { Row, Spacer } from 'solid-core/dist/components/styled';
 import styled from 'styled-components';
 import { RATINGS, THEME } from '../util';
 
@@ -8,7 +8,7 @@ const Scales = ({ rating, updateValue, helper }) => {
     <Container>
       {/* STORY */ }
       <Section>
-        <CardHeader>Story</CardHeader>
+        <Header>Story</Header>
         <Row align='center'>
           <Slider
             onChange={ updateValue('story') }
@@ -23,7 +23,7 @@ const Scales = ({ rating, updateValue, helper }) => {
       </Section>
       {/* CHARACTER */ }
       <Section>
-        <CardHeader>Character</CardHeader>
+        <Header>Character</Header>
         <Row align='center'>
           <Slider
             onChange={ updateValue('character') }
@@ -38,7 +38,7 @@ const Scales = ({ rating, updateValue, helper }) => {
       </Section>
       {/* PERFORMANCE */ }
       <Section>
-        <CardHeader>Performance</CardHeader>
+        <Header>Performance</Header>
         <Row align='center'>
           <Slider
             onChange={ updateValue('performance') }
@@ -53,7 +53,7 @@ const Scales = ({ rating, updateValue, helper }) => {
       </Section>
       {/* VISUALS */ }
       <Section>
-        <CardHeader>Visuals</CardHeader>
+        <Header>Visuals</Header>
         <Row align='center'>
           <Slider
             onChange={ updateValue('visuals') }
@@ -68,7 +68,7 @@ const Scales = ({ rating, updateValue, helper }) => {
       </Section>
       {/* SOUNDTRACK */ }
       <Section>
-        <CardHeader>Soundtrack</CardHeader>
+        <Header>Soundtrack</Header>
         <Row align='center'>
           <Slider
             onChange={ updateValue('soundtrack') }
@@ -93,6 +93,7 @@ const Container = styled.div`
   background: ${ THEME.dark }EE;
   width: 100%;
   align-items: center;
+  padding-top: 1em;
   box-shadow: 2px 2px 10px ${ THEME.primary }EE;
 `
 
@@ -104,8 +105,12 @@ const Value = styled.h2`
   width: 1em;
 `
 
+const Header = styled.h3`
+  margin: -.5em 0em -1.5em 0em;
+`
+
 const HelperText = styled.p`
-  margin-top: 0;
+  margin-top: -1.7em;
   font-size: small;
   padding-left: 1em;
   opacity: .7;
