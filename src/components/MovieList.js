@@ -83,7 +83,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         {
           displayList.map(m => (
             <Column justify='flex-start' align='center' width='100%' key={ m.id }>
-              <Card className="clickable" onClick={ () => toggleFocus(m.id) }>
+              <Card className="clickable" onClick={ openRating(m) }>
                 <Frame
                   position='absolute'
                   fit='cover'
@@ -93,21 +93,10 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                 >
                   <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
                 </Frame>
+                <Total>{ !!overallScore(m.rating) ? overallScore(m.rating) : <span className='material-icons'>star_half</span> }</Total>
                 <Column height='9em' justify='flex-end'>
                   <Title>{ m.data.Title }</Title>
                 </Column>
-                <Action>
-                  <Fab
-                    onClick={ openRating(m) }
-                    size='large'
-                    color='secondary'>
-                    {
-                      overallScore(m.rating) ?
-                        <Rate>{ overallScore(m.rating) }</Rate>
-                        : <Rate className="material-icons">star_half</Rate>
-                    }
-                  </Fab>
-                </Action>
                 <Spacer height='1em' />
                 <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } showForm={ focus === m.id } />
               </Card>
@@ -139,16 +128,6 @@ const Title = styled.h2`
   border-radius: 2px;
 `
 
-const Rate = styled.h1`
-  color: ${ THEME.dark };
-`
-
-const Action = styled.span`
-  position: absolute;
-  top: -.2em;
-  right: -.2em;
-`
-
 const Background = styled.div`
   background: ${ THEME.dark }EE;
   padding: .2em;
@@ -157,4 +136,20 @@ const Background = styled.div`
   width: 30%;
   min-width: 200px;
   max-width: 30em;
+`
+
+const Total = styled.span`
+  font-size: 3em;
+  align-self: flex-end;
+  background: ${ THEME.primary };
+  color: ${ THEME.dark };
+  padding: .1em;
+  text-shadow: 1px 1px 5px ${ THEME.light }70;
+  box-shadow: 2px 2px 10px ${ THEME.light }DD;
+  position: absolute;
+  top: -.1em;
+  right: .2em;
+  min-width: 50px;
+  text-align: center;
+  border-radius: 2px;
 `
