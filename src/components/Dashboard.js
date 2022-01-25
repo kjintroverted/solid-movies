@@ -69,14 +69,14 @@ const Dashboard = ({ user, data }) => {
       updateQueue(addToUpdateQueue(queue, thing))
       let i = movies.findIndex(m => m.id === updatedMovie.id);
       updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
-      if (then) then(updateMovie);
+      if (then) then(updatedMovie);
     }
   }
 
   return (
     <Layout>
       <HeaderBar theme={ THEME }>
-        <h2>{ user ? `${ user.firstName }'s` : "My" } Movies</h2>
+        <h2>{ user && user.nickname ? `${ user.nickname }'s` : user && user.name ? `${ user.name }'s` : "My" } Movies</h2>
         <Spacer />
         {
           user ?

@@ -75,8 +75,8 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
       <Container>
         {
           displayList.map(m => (
-            <Column justify='flex-start' align='center' width='100%'>
-              <Card className="clickable" key={ m.id } onClick={ () => toggleFocus(m.id) }>
+            <Column justify='flex-start' align='center' width='100%' key={ m.id }>
+              <Card className="clickable" onClick={ () => toggleFocus(m.id) }>
                 <Frame
                   position='absolute'
                   fit='cover'
