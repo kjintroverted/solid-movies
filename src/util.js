@@ -107,7 +107,14 @@ export async function searchMovies(q) {
 }
 
 export async function getMovieData(id) {
-  let res = await fetch(`https://www.omdbapi.com/?apikey=${ KEY }&i=${ id }`);
-  let body = await res.json()
-  return body;
+  let data = localStorage.getItem(id)
+  if (data) {
+    data = JSON.parse(data)
+  }
+  else {
+    data = await fetch(`https://www.omdbapi.com/?apikey=${ KEY }&i=${ id }`);
+    data = await data.json()
+    localStorage.setItem(id, JSON.stringify(data))
+  }
+  return data;
 }
