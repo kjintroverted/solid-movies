@@ -47,6 +47,13 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
     else setFocus(null)
   }
 
+  function openRating(m) {
+    return e => {
+      e.stopPropagation();
+      onSelect(m)
+    }
+  }
+
   return (
     <Column align='center'>
       <Spacer height='1em' />
@@ -91,7 +98,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                 </Column>
                 <Action>
                   <Fab
-                    onClick={ () => onSelect(m) }
+                    onClick={ openRating(m) }
                     size='large'
                     color='secondary'>
                     {
