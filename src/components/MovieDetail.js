@@ -12,7 +12,6 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
   if (!movie) return <></>
 
   let total = overallScore(movie.rating);
-  debugger
 
   function updateRatingValue(field) {
     return (_, val) => {

@@ -47,6 +47,13 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
     else setFocus(null)
   }
 
+  function openRating(m) {
+    return e => {
+      e.stopPropagation();
+      onSelect(m)
+    }
+  }
+
   return (
     <Column align='center'>
       <Spacer height='1em' />
@@ -81,7 +88,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                   position='absolute'
                   fit='cover'
                   top='0' left='0'
-                  width='100%' height='10em'
+                  width='100%' height='20em'
                   focusX='center' focusY='15%'
                 >
                   <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
@@ -91,7 +98,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                 </Column>
                 <Action>
                   <Fab
-                    onClick={ () => onSelect(m) }
+                    onClick={ openRating(m) }
                     size='large'
                     color='secondary'>
                     {
@@ -127,7 +134,9 @@ const Container = styled.div`
 const Title = styled.h2`
   margin: 0px;
   padding: .1em;
-  background: ${ THEME.primary }DD;
+  background: ${ THEME.primary }CC;
+  color: ${ THEME.light };
+  border-radius: 2px;
 `
 
 const Rate = styled.h1`
