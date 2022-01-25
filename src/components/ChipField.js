@@ -1,7 +1,6 @@
 import { Chip, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { Row } from "solid-core";
-import { Spacer } from "solid-core/dist/components/styled";
 import { THEME } from "../util";
 
 function ChipField({ data, onSubmit, onDelete, showForm }) {
