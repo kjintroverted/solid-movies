@@ -18,15 +18,13 @@ function ChipField({ data, onSubmit, onDelete, showForm }) {
     <Row wrap="wrap">
       {
         data.map(d => (
-          <span key={ d }>
-            <Chip
-              onDelete={ () => onDelete(d) }
-              color="secondary"
-              label={ d }
-              size="small"
-              style={ { marginBottom: '.2em', color: THEME.dark } } />
-            <Spacer width='.2em' />
-          </span>
+          <Chip
+            key={ d }
+            onDelete={ () => onDelete(d) }
+            color="secondary"
+            label={ d }
+            size="small"
+            style={ { marginBottom: '.2em', marginLeft: '.2em', color: THEME.dark } } />
         ))
       }
       {
