@@ -1,4 +1,4 @@
-import { Button, Fab, TextField } from "@material-ui/core";
+import { Button, Fab, IconButton, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Card, Column, Frame, Row, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
@@ -43,8 +43,11 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   }
 
   function toggleFocus(id) {
-    if (id !== focus) setFocus(id)
-    else setFocus(null)
+    return e => {
+      e.stopPropagation()
+      if (focus === id) setFocus(null)
+      else setFocus(id)
+    }
   }
 
   function openRating(m) {
@@ -98,7 +101,13 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
                   <Title>{ m.data.Title }</Title>
                 </Column>
                 <Spacer height='1em' />
-                <ChipField data={ m.tags } onSubmit={ addTag(m) } onDelete={ removeTag(m) } showForm={ focus === m.id } />
+                <ChipField
+                  data={ m.tags }
+                  onSubmit={ addTag(m) }
+                  onDelete={ removeTag(m) }
+                  showForm={ focus === m.id }
+                  toggleEdit={ toggleFocus(m.id) }
+                />
               </Card>
             </Column>
           ))
@@ -129,7 +138,7 @@ const Title = styled.h2`
 `
 
 const Background = styled.div`
-  background: ${ THEME.dark }EE;
+  background: ${ THEME.dark }DD;
   padding: .2em;
   margin: 0em .3em;
   border-radius: .3em;
@@ -139,7 +148,7 @@ const Background = styled.div`
 `
 
 const Total = styled.span`
-  font-size: 3em;
+  font-size: 2.5em;
   align-self: flex-end;
   background: ${ THEME.primary };
   color: ${ THEME.dark };
