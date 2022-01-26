@@ -4,7 +4,7 @@ import { Row } from "solid-core";
 import styled from "styled-components";
 import { THEME } from "../util";
 
-function ChipField({ data, onSubmit, onDelete, showForm }) {
+function ChipField({ data, onSubmit, onDelete, showForm, toggleEdit }) {
 
   const [value, setValue] = useState("");
 
@@ -21,25 +21,34 @@ function ChipField({ data, onSubmit, onDelete, showForm }) {
           <Chip
             key={ d }
             onDelete={ () => onDelete(d) }
-            color="secondary"
+            color="primary"
             label={ d }
             size="small"
-            style={ { marginBottom: '.2em', marginLeft: '.2em', color: THEME.dark } } />
+            style={ { marginBottom: '.2em', marginLeft: '.2em' } } />
         ))
       }
       {
-        showForm &&
-        <Background>
-          <TextField
-            color="primary"
-            fullWidth
-            style={ { opacity: .5 } }
-            placeholder="add tag..."
-            value={ value }
-            onChange={ e => setValue(e.target.value) }
-            onClick={ e => e.stopPropagation() }
-            onKeyDown={ checkReturn } />
-        </Background>
+        !showForm ?
+          <Chip
+            className='clickable'
+            onClick={ toggleEdit }
+            label='add tag...'
+            color='secondary'
+            size='small'
+            style={ { marginBottom: '.2em', marginLeft: '.2em', color: THEME.dark } } />
+          : <Background>
+            <TextField
+              autoFocus
+              color="primary"
+              fullWidth
+              style={ { opacity: .5 } }
+              placeholder="add tag..."
+              value={ value }
+              onBlur={ toggleEdit }
+              onChange={ e => setValue(e.target.value) }
+              onClick={ e => e.stopPropagation() }
+              onKeyDown={ checkReturn } />
+          </Background>
       }
     </Row>
   )
