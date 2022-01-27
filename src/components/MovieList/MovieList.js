@@ -2,7 +2,7 @@ import { Button, Fab, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Card, Column, Frame, Row, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
-import { overallScore, sortRating, THEME } from "../util";
+import { overallScore, sortRating, THEME } from "../../util";
 import ChipField from './ChipField';
 
 const RATE_FILTERS = [

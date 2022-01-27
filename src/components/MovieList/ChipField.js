@@ -2,7 +2,7 @@ import { Chip, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { Row } from "solid-core";
 import styled from "styled-components";
-import { THEME } from "../util";
+import { THEME } from "../../util";
 
 function ChipField({ data, onSubmit, onDelete, showForm, toggleEdit }) {
 
