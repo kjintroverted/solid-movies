@@ -17,10 +17,10 @@ const Table = ({
   function buildRows() {
     let rank = 1;
     let prevScore;
-    return movies.map(m => {
+    return movies.map((m, i) => {
       let score = overallScore(m.rating);
       if (prevScore && prevScore !== score) {
-        rank++;
+        rank = i + 1;
       }
       prevScore = score;
       return (
