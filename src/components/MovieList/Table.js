@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import styled from "styled-components";
 import { overallScore, THEME } from "../../util";
 import ChipField from "./ChipField";
@@ -14,6 +15,14 @@ const Table = ({
 
   return (
     <Container>
+      <TableRow style={ { background: 'none' } }>
+        <p></p>
+        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Title</Button>
+        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Tags</Button>
+        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Meta</Button>
+        <Button style={ { justifyContent: 'flex-start' } } color='primary'>imdb</Button>
+        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Rating</Button>
+      </TableRow>
       {
         movies.map((m, i) => (
           <TableRow>
@@ -49,8 +58,8 @@ const Container = styled.div`
 const TableRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 2em 1fr 2fr 2.5em 2.5em 4em;
+  grid-template-columns: 2em 1fr 2fr 4em 4em 5em;
   padding: 0em .5em;
-  background: ${ THEME.dark };
+  background: ${ THEME.dark }EE;
   border-radius: 5px;
 `
