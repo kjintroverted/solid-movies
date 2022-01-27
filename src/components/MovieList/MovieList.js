@@ -4,6 +4,7 @@ import { Column, Row, Spacer } from "solid-core/dist/components/styled"
 import styled from "styled-components";
 import { overallScore, sortRating, THEME } from "../../util";
 import Grid from "./Grid";
+import Table from "./Table";
 
 const RATE_FILTERS = [
   'ALL',
@@ -82,7 +83,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
           <span className='material-icons'>{ sort > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
         </Fab>
       </Row>
-      <Grid
+      <Table
         movies={ displayList }
         addTag={ addTag }
         removeTag={ removeTag }
