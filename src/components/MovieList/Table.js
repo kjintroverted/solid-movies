@@ -26,7 +26,7 @@ const Table = ({
       </TableRow>
       {
         movies.map((m, i) => (
-          <TableRow className='clickable' onClick={ () => openRating(m) } key={ m.id }>
+          <TableRow className='clickable' onClick={ openRating(m) } key={ m.id }>
             <p>{ i + 1 }</p>
             <Row align='center'>
               <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
