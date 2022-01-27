@@ -19,9 +19,9 @@ const Table = ({
         <p></p>
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Title</Button>
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Tags</Button>
-        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Meta</Button>
-        <Button style={ { justifyContent: 'flex-start' } } color='primary'>imdb</Button>
-        <Button style={ { justifyContent: 'flex-start' } } color='primary'>Rating</Button>
+        <Button color='primary'>Meta</Button>
+        <Button color='primary'>imdb</Button>
+        <Button color='primary'>Rating</Button>
       </TableRow>
       {
         movies.map((m, i) => (
@@ -35,9 +35,9 @@ const Table = ({
               showForm={ focus === m.id }
               toggleEdit={ toggleFocus(m.id) }
             />
-            <p>{ m.data.Metascore }</p>
-            <p>{ m.data.imdbRating }</p>
-            <h2>{ overallScore(m.rating) }</h2>
+            <p style={ { justifySelf: 'center' } }>{ m.data.Metascore }</p>
+            <p style={ { justifySelf: 'center' } }>{ m.data.imdbRating }</p>
+            <h2 style={ { justifySelf: 'center' } }>{ overallScore(m.rating) }</h2>
           </TableRow>
         ))
       }
@@ -58,7 +58,7 @@ const Container = styled.div`
 const TableRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 2em 1fr 2fr 4em 4em 5em;
+  grid-template-columns: 2em 1.5fr 2fr 4em 4em 5em;
   padding: 0em .5em;
   background: ${ THEME.dark }EE;
   border-radius: 5px;
