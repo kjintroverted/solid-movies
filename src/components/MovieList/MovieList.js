@@ -75,14 +75,17 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         >
           { RATE_FILTERS[rateFilter] }
         </Button>
-        <Fab
-          size='small'
-          color='secondary'
-          style={ { margin: '0em .2em' } }
-          onClick={ () => setGridView(!gridView) }
-        >
-          <span className='material-icons'>{ gridView ? 'table_rows' : 'grid_view' }</span>
-        </Fab>
+        {
+          window.innerWidth >= 800 &&
+          <Fab
+            size='small'
+            color='secondary'
+            style={ { margin: '0em .2em' } }
+            onClick={ () => setGridView(!gridView) }
+          >
+            <span className='material-icons'>{ gridView ? 'table_rows' : 'grid_view' }</span>
+          </Fab>
+        }
         <Fab
           size='small'
           color='secondary'
