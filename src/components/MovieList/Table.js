@@ -16,7 +16,7 @@ const Table = ({
     <Container>
       {
         movies.map((m, i) => (
-          <>
+          <TableRow>
             <p>{ i + 1 }</p>
             <h3>{ m.data.Title }</h3>
             <ChipField
@@ -29,7 +29,7 @@ const Table = ({
             <p>{ m.data.Metascore }</p>
             <p>{ m.data.imdbRating }</p>
             <h2>{ overallScore(m.rating) }</h2>
-          </>
+          </TableRow>
         ))
       }
     </Container>
@@ -40,12 +40,17 @@ export default Table;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 2em 1fr 2fr 2.5em 2.5em 4em;
   grid-template-columns: repeat(auto, 3em);
   width: 95%;
-  padding: 0em 1em;
+  padding: .5em 1em;
+  row-gap: .5em;
+  `
+
+const TableRow = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 2em 1fr 2fr 2.5em 2.5em 4em;
+  padding: 0em .5em;
   background: ${ THEME.dark };
   border-radius: 5px;
-  align-items: center;
-  row-gap: .5em;
 `
