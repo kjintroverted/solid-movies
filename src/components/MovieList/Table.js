@@ -28,7 +28,7 @@ const Table = ({
           <Rank>{ rank }</Rank>
           <Row align='center'>
             <img src={ m.data.Poster } alt={ `${ m.data.Title } Poster` } />
-            <h3>{ m.data.Title }</h3>
+            <h2>{ m.data.Title }</h2>
           </Row>
           <ChipField
             data={ m.tags }
@@ -37,7 +37,7 @@ const Table = ({
             showForm={ focus === m.id }
             toggleEdit={ toggleFocus(m.id) }
           />
-          <h2 style={ { justifySelf: 'center' } }>{ score }</h2>
+          <Rating style={ { justifySelf: 'center' } }>{ score }</Rating>
           <p style={ { justifySelf: 'center' } }>{ m.data.imdbRating }</p>
           <p style={ { justifySelf: 'center' } }>{ m.data.Metascore }</p>
         </TableRow>
@@ -72,7 +72,7 @@ const Container = styled.div`
 const TableRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 2.5em 2fr 2fr 4em 4em 5em;
+  grid-template-columns: 2.5em 2fr 1.5fr 4em 4em 5em;
   padding: 0em .5em;
   background: ${ THEME.dark }EE;
   border-radius: 5px;
@@ -81,11 +81,19 @@ const TableRow = styled.div`
     margin: .2em .5em;
     box-shadow: 2px 2px 5px ${ THEME.primary }AA;
   }
-`
+  `
 
 const Rank = styled.h2`
   text-align: center;
   background: ${ THEME.secondary };
   color: ${ THEME.dark };
   border-radius: 5px;
+  padding: .3em .1em;
+  `
+
+const Rating = styled.h2`
+  text-align: center;
+  color: ${ THEME.light };
+  font-size: 2em;
+  text-shadow: 3px 3px 10px ${ THEME.primary }DD;
 `
