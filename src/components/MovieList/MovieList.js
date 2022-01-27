@@ -19,6 +19,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   const [tagFilter, setTagFilter] = useState('')
   const [rateFilter, setRateFilter] = useState(0)
   const [sort, setSort] = useState(1)
+  const [gridView, setGridView] = useState(true)
 
   useEffect(() => {
     setList(movies
@@ -78,18 +79,37 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
           size='small'
           color='secondary'
           style={ { margin: '0em .2em' } }
+          onClick={ () => setGridView(!gridView) }
+        >
+          <span className='material-icons'>{ gridView ? 'table_rows' : 'grid_view' }</span>
+        </Fab>
+        <Fab
+          size='small'
+          color='secondary'
+          style={ { margin: '0em .2em' } }
           onClick={ () => setSort(sort * -1) }
         >
           <span className='material-icons'>{ sort > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
         </Fab>
       </Row>
-      <Table
-        movies={ displayList }
-        addTag={ addTag }
-        removeTag={ removeTag }
-        focus={ focus }
-        toggleFocus={ toggleFocus }
-        openRating={ openRating } />
+      {
+        gridView ?
+          <Grid
+            movies={ displayList }
+            addTag={ addTag }
+            removeTag={ removeTag }
+            focus={ focus }
+            toggleFocus={ toggleFocus }
+            openRating={ openRating } />
+          : <Table
+            movies={ displayList }
+            addTag={ addTag }
+            removeTag={ removeTag }
+            focus={ focus }
+            toggleFocus={ toggleFocus }
+            openRating={ openRating } />
+
+      }
     </Column>
   )
 }
