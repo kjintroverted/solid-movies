@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import { Row } from "solid-core/dist/components/styled";
 import styled from "styled-components";
-import { overallScore, THEME } from "../../util";
+import { overallScore, sortExternalRating, THEME } from "../../util";
 import ChipField from "./ChipField";
 
 
@@ -11,7 +11,8 @@ const Table = ({
   removeTag,
   focus,
   toggleFocus,
-  openRating
+  openRating,
+  changeSort
 }) => {
 
   function buildRows() {
@@ -52,7 +53,7 @@ const Table = ({
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Title</Button>
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Tags</Button>
         <Button color='primary'>Rating</Button>
-        <Button color='primary'>imdb</Button>
+        <Button onClick={ () => changeSort(() => sortExternalRating('imdbRating')) } color='primary'>imdb</Button>
         <Button color='primary'>Meta</Button>
       </TableRow>
       { buildRows() }

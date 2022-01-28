@@ -111,7 +111,9 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
             removeTag={ removeTag }
             focus={ focus }
             toggleFocus={ toggleFocus }
-            openRating={ openRating } />
+            openRating={ openRating }
+            changeSort={ setSortFunction }
+          />
 
       }
     </Column>
