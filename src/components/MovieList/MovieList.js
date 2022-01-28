@@ -18,7 +18,8 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   const [focus, setFocus] = useState(null)
   const [tagFilter, setTagFilter] = useState('')
   const [rateFilter, setRateFilter] = useState(0)
-  const [sort, setSort] = useState(1)
+  const [factor, setFactor] = useState(1)
+  const [sortFunction, setSortFunction] = useState(() => sortRating)
   const [gridView, setGridView] = useState(true)
 
   useEffect(() => {
@@ -28,8 +29,8 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         || (rateFilter === 2 && !!overallScore(m.rating)))
       .filter(m => !tagFilter
         || m.tags.findIndex(t => t.toLowerCase().indexOf(tagFilter.toLowerCase()) >= 0) >= 0)
-      .sort(sortRating(sort)))
-  }, [movies, tagFilter, rateFilter, sort])
+      .sort(sortFunction(factor)))
+  }, [movies, tagFilter, rateFilter, sortFunction, factor])
 
   function addTag(movie) {
     return (tag) => {
@@ -90,9 +91,9 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
           size='small'
           color='secondary'
           style={ { margin: '0em .2em' } }
-          onClick={ () => setSort(sort * -1) }
+          onClick={ () => setFactor(factor * -1) }
         >
-          <span className='material-icons'>{ sort > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
+          <span className='material-icons'>{ factor > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
         </Fab>
       </Row>
       {
