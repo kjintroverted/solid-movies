@@ -30,6 +30,7 @@ const Table = ({
       case 'META':
         changeSort(() => sortExternalRating('Metascore'))
         break;
+      default:
     }
   }
 
