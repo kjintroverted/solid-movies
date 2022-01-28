@@ -93,7 +93,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
           style={ { margin: '0em .2em' } }
           onClick={ () => setFactor(factor * -1) }
         >
-          <span className='material-icons'>{ factor > 0 ? 'arrow_upward' : 'arrow_downward' }</span>
+          <span className='material-icons'>{ factor > 0 ? 'arrow_downward' : 'arrow_upward' }</span>
         </Fab>
       </Row>
       {

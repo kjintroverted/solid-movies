@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
+import { useState } from "react";
 import { Row } from "solid-core/dist/components/styled";
 import styled from "styled-components";
-import { overallScore, sortExternalRating, THEME } from "../../util";
+import { overallScore, sortExternalRating, sortRating, THEME } from "../../util";
 import ChipField from "./ChipField";
 
 
@@ -14,6 +15,23 @@ const Table = ({
   openRating,
   changeSort
 }) => {
+
+  const [sortedBy, setSortedBy] = useState('RATE');
+
+  function updateSort(FIELD) {
+    setSortedBy(FIELD);
+    switch (FIELD) {
+      case 'RATE':
+        changeSort(() => sortRating)
+        break;
+      case 'IMDB':
+        changeSort(() => sortExternalRating('imdbRating'))
+        break;
+      case 'META':
+        changeSort(() => sortExternalRating('Metascore'))
+        break;
+    }
+  }
 
   function buildRows() {
     let rank = 1;
@@ -52,9 +70,24 @@ const Table = ({
         <p></p>
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Title</Button>
         <Button style={ { justifyContent: 'flex-start' } } color='primary'>Tags</Button>
-        <Button color='primary'>Rating</Button>
-        <Button onClick={ () => changeSort(() => sortExternalRating('imdbRating')) } color='primary'>imdb</Button>
-        <Button color='primary'>Meta</Button>
+        <Button
+          variant={ sortedBy === 'RATE' ? 'contained' : 'text' }
+          onClick={ () => updateSort('RATE') }
+          color='primary'>
+          Rating
+        </Button>
+        <Button
+          variant={ sortedBy === 'IMDB' ? 'contained' : 'text' }
+          onClick={ () => updateSort('IMDB') }
+          color='primary'>
+          imdb
+        </Button>
+        <Button
+          variant={ sortedBy === 'META' ? 'contained' : 'text' }
+          onClick={ () => updateSort('META') }
+          color='primary'>
+          Meta
+        </Button>
       </TableRow>
       { buildRows() }
     </Container>
