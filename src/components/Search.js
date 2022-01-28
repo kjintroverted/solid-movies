@@ -30,6 +30,7 @@ const Search = ({ add, idList }) => {
 
   return (
     <Column width="100%" height="none" align="center">
+      <Spacer height='.5em' />
       <Background>
         <TextField
           fullWidth

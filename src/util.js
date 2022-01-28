@@ -37,6 +37,14 @@ export const sortRating = (factor) => {
   )
 }
 
+export const sortExternalRating = (field) => (factor) => {
+  return (a, b) => (
+    isNaN(+a.data[field]) ? 1
+      : isNaN(+b.data[field]) ? -1
+        : (+b.data[field] - +a.data[field]) * factor
+  )
+}
+
 export const RATINGS = {
   story: [
     `I'm staring at a blank screen`,

@@ -9,7 +9,7 @@ import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
 import Loading from "./Loading";
 import MovieDetail from "./MovieDetail";
-import MovieList from "./MovieList";
+import MovieList from "./MovieList/MovieList";
 import Search from "./Search";
 
 const Dashboard = ({ user, data }) => {
