@@ -12,9 +12,12 @@ export const THEME = {
 
 export const AppTheme = createContext(THEME)
 
+// HOW LONG TO WAIT BETWEEN KEYSTROKES BEFORE HITTING SEARCH API
 export const SEARCH_DELAY = 500;
+// HOW MANY POSITIONS RIGHT OF DECIMAL POINT WHEN ROUNDING
+export const DECIMAL = 1;
 
-export function overallScore(rating) {
+export function overallScore(rating, sigDigits = DECIMAL) {
   if (!rating.story
     || !rating.character
     || !rating.performance
@@ -26,7 +29,7 @@ export function overallScore(rating) {
     + (rating.character + rating.performance) / 2
     + (rating.visuals + rating.soundtrack) / 2
   ) / 3;
-  return Math.round(res * 10) / 10;
+  return Math.round(res * Math.pow(10, sigDigits)) / Math.pow(10, sigDigits);
 }
 
 export const sortRating = (factor) => {
