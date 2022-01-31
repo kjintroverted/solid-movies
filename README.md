@@ -26,14 +26,17 @@ The overall rating is decided by averaging the raw Story rating with the calcula
 The story is the driving force, the life blood of any medium. It's what brings us back time and again to the same movies, books, music, people: the story they tell and how it connects with us. We are experiential beings, we learn by living through something physically, mentally, or emotionally. Until you experience something, it's not part of you. Once you experience something, it's always a part of you.
 Stories are experiences communicated to us by storytellers. For this reason, this is given the greatest weight in the overall rating analysis, not combined or influenced by any other categories until the final average.
 
----
 **Questions to ask:**
-- What is the story?
-- What is unique, interesting, or challenging about the story?
-- How well does the genesis fit the story?
-- How well does the ending fit the story?
-- What makes this story worth telling?
----
+
+> What is the story?
+
+> What is unique, interesting, or challenging about the story?
+
+> How well does the genesis fit the story?
+
+> How well does the ending fit the story?
+
+> What makes this story worth telling?
 
 **Breakdown**
 
@@ -47,6 +50,8 @@ Stories are experiences communicated to us by storytellers. For this reason, thi
 1. The story is interesting and challenges the norm in meaningful ways
 1. The story is interesting and full of meaningful exploration
 1. The perfect story. Meaningful. Powerful, Timeless.
+
+---
 
 ### Humanities
 
@@ -66,14 +71,18 @@ Characters are our window into a story. As the audience the characters are our c
 
 Characters are used to explore nature. They can be an unchanging rock to explore other characters or aspects of the world, or they can grow stronger or weaker as the story goes. They show us our own ability to stand firm, adapt, hurt, heal, create and destroy. Whether they are meant to be a mirror for the audience to see themselves or represent someone or something bigger than themselves, characters give a story substance and influence in our minds and hearts.
 
----
 **Questions to ask:**
-- Who are the characters?
-- Do the characters experience meaningful development?
-- Are the characters the same throughout? Or, in the end, changed?
-- Are the characters meaningful and/or relatable?
-- Is the dialogue natural/fitting for the characters involved?
----
+
+> Who are the characters?
+
+> Do the characters experience meaningful development?
+
+> Are the characters the same throughout? Or, in the end, changed?
+
+> Are the characters meaningful and/or relatable?
+
+> Is the dialogue natural/fitting for the characters involved?
+
 
 **Breakdown**
 
@@ -88,31 +97,38 @@ Characters are used to explore nature. They can be an unchanging rock to explore
 9. The characters are enthralling. I want to know more about them.
 10. I would watch a movie of these characters just talking to one another
 
+---
+
 #### Performance
 
 A character is intimately tied to those portraying them. Whether an in-person actor or performer, a motion capture artist, or a voice actor, these people bring characters to life. They are charged with taking a script, an archetype or shell of a character and make them be, to step on the screen and into our lives.
 
----
 **Questions to ask:**
-- Who are the performers?
-- Do the performances enhance the characters and story?
-- Do the performances detract from the characters or distract from the story?
-- How is the chemistry between performers?
-- Do you find yourself observing characters? or only the performers behind them?
----
+
+> Who are the performers?
+
+> Do the performances enhance the characters and story?
+
+> Do the performances detract from the characters or distract from the story?
+
+> How is the chemistry between performers?
+
+> Do you find yourself observing characters? or only the performers behind them?
 
 **Breakdown**
 
 1. They just cast that dead bird from the parking lot
-1. The performers clearly don't want to be in this movie
-1. The performers don't portray the characters well
-1. The performers are distracting
-1. The performers are fine, I don't notice them much
-1. Some/most of the performances are good
-1. The performers have good chemistry and really bring the characters to life
-1. Excellent performance, I have a hard time imagining a different cast
-1. Perfectly cast with stand-out performances
-1. Perfectly cast, delivering the performance of a lifetime
+2. The performers clearly don't want to be in this movie
+3. The performers don't portray the characters well
+4. The performers are distracting
+5. The performers are fine, I don't notice them much
+6. Some/most of the performances are good
+7. The performers have good chemistry and really bring the characters to life
+8. Excellent performance, I have a hard time imagining a different cast
+9. Perfectly cast with stand-out performances
+10. Perfectly cast, delivering the performance of a lifetime
+
+--- 
 
 ### Atmosphere
 
@@ -124,14 +140,17 @@ The way a movie is presented has many factors: is it live or animated? Do they u
 
 There are cues everywhere that dictate how we perceive the world and what we expect. Imagery, symbolism, body language all combine to create a whole world in the metadata of our mind. How is this used in the movie?
 
----
 **Questions to ask:**
-- Is there anything notable, interesting, or odd about the visual presentation?
-- Does the presentation enhance the story-telling?
-- Is there any major imagery or symbolism?
-- Is the presentation able to pull you into a world outside of your own?
-- What do the individual frames (stills) portray? Are they intentional?
----
+
+> Is there anything notable, interesting, or odd about the visual presentation?
+
+> Does the presentation enhance the story-telling?
+
+> Is there any major imagery or symbolism?
+
+> Is the presentation able to pull you into a world outside of your own?
+
+> What do the individual frames (stills) portray? Are they intentional?
 
 **Breakdown**
 
@@ -146,19 +165,23 @@ There are cues everywhere that dictate how we perceive the world and what we exp
 1. There are constantly powerful visuals with striking imagery
 1. The visuals tell a story on their own
    
+--- 
+
 #### Soundtrack
 
 Music and sound effects are powerful. What we hear has the power to pull on our experience and emotion to send us reeling into worlds of meaning that cannot be scripted.
 
 Hearing is a non-voluntary sense. We cannot close our ears or hear away. As such, what we hear or don't hear speaks volumes simply due to our expectations. Does a movie play on those expectations or leverage them in any way?
 
----
 **Questions to ask:**
-- What is the tone of the movie audio?
-- Is there a soundtrack? Does it enhance the tone of the story/characters?
-- Are the sound effects what you expected?
-- Are your experiences or emotions affected at all by the audio choices?
----
+
+> What is the tone of the movie audio?
+
+> Is there a soundtrack? Does it enhance the tone of the story/characters?
+
+> Are the sound effects what you expected?
+
+> Are your experiences or emotions affected at all by the audio choices?
 
 **Breakdown**
 
