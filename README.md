@@ -10,16 +10,16 @@ The overall rating is decided by averaging the raw Story rating with the calcula
 
 ## Overall Score Meaning
 
-1. I just, I don't know...
-1. Trash
-1. Waste of Time
-1. Can not recommend
-1. The Status Quo
-1. A Good Movie
-1. A Must See
-1. Love It
-1. A Classic
-1. "Perfect" 
+1. You're tempted to sue the production company
+2. Trash
+3. Waste of Time
+4. Can not recommend
+5. The Status Quo
+6. A Good Movie
+7. A Must See
+8. Love It
+9. A Classic
+10. "Perfect" 
  
 ### Story
 
