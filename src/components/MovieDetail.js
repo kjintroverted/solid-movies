@@ -54,7 +54,7 @@ const Ratings = styled.div`
   height: 95%;
   display: flex;
   flex-direction: column;
-  `
+`
 
 const Total = styled.span`
   font-size: 5em;
