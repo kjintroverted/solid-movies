@@ -48,7 +48,7 @@ const Dashboard = ({ user }) => {
   async function addMovie(id) {
     let data = await getMovieData(id);
     let movie = { id, data, rating: {}, tags: [] };
-    { dataset, movie } = await initThing("movie", movie, movieShape)
+    ({ dataset, movie } = await initThing("movie", movie, movieShape))
     updateMovies([...movies, { ...movie, data }]);
     setDataset(dataset)
   }
