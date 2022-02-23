@@ -57,7 +57,7 @@ const Table = ({
             showForm={ focus === m.id }
             toggleEdit={ toggleFocus(m.id) }
           />
-          <Rating style={ { justifySelf: 'center' } }>{ score }</Rating>
+          <Rating style={ { justifySelf: 'center' } }>{ score || '??' }</Rating>
           <p style={ { justifySelf: 'center' } }>{ m.data.imdbRating }</p>
           <p style={ { justifySelf: 'center' } }>{ m.data.Metascore }</p>
         </TableRow>
