@@ -23,6 +23,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   // FILTERS
   const [tagFilter, setTagFilter] = useState('')
   const [genreFilter, setGenreFilter] = useState('')
+  const [yearFilter, setYearFilter] = useState('')
 
   useEffect(() => {
     setList(movies
@@ -33,11 +34,14 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         || m.tags.findIndex(t => t.toLowerCase().indexOf(tagFilter.toLowerCase()) >= 0) >= 0)
       .filter(m => !genreFilter
         || m.data.Genre.split(', ').findIndex(t => t.toLowerCase().indexOf(genreFilter.toLowerCase()) >= 0) >= 0)
+      .filter(m => !yearFilter
+        || m.data.Year.indexOf(yearFilter) === 0)
       .sort(sortFunction(factor)))
   }, [
     movies,
     tagFilter,
     genreFilter,
+    yearFilter,
     rateFilter,
     sortFunction,
     factor
@@ -83,6 +87,9 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         </Background>
         <Background>
           <TextField fullWidth placeholder='filter by genre' onChange={ e => setGenreFilter(e.target.value) } />
+        </Background>
+        <Background>
+          <TextField fullWidth placeholder='filter by year' onChange={ e => setYearFilter(e.target.value) } />
         </Background>
 
         <Button
