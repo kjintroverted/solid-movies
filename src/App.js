@@ -4,7 +4,6 @@ import {
   Main,
   appLogin,
   getDomain,
-  getThings,
   loadDataset,
   loadThing,
   save,
@@ -25,7 +24,6 @@ const muiTheme = newTheme(THEME)
 function App() {
 
   const [user, setUser] = useState();
-  const [things, setThings] = useState();
   const [queue, updateQueue] = useState([]);
   const [dataset, setDataset] = useState(null);
   // PROFILE STATE
@@ -33,8 +31,9 @@ function App() {
   const [edit, toggleEdit] = useState(false);
 
   async function saveFromQ() {
-    await save(queue);
+    let dataset = await save(queue);
     updateQueue([])
+    setDataset(dataset)
   }
 
   useEffect(() => {
@@ -66,21 +65,18 @@ function App() {
     if (profile) {
       // LOAD MOVIE DATASET
       loadDataset(getDomain(user) + "/movies")
-        .then(data => {
-          setDataset(data)
-          setThings(getThings(data))
-        });
+        .then(setDataset)
     }
   }, [profile, user])
 
   return (
-    <SaveState.Provider value={ { queue, updateQueue, saveFromQ, dataset } }>
+    <SaveState.Provider value={ { queue, updateQueue, saveFromQ, dataset, setDataset } }>
       <AppTheme.Provider value={ { ...THEME, mui } }>
         <mui.ThemeProvider theme={ muiTheme }>
           <Main>
             <Router>
               <Routes>
-                <Route path="/" element={ <Dashboard data={ things } user={ profile } /> } />
+                <Route path="/" element={ <Dashboard user={ profile } /> } />
                 <Route path="/profile"
                   element={
                     <SaveState.Consumer>

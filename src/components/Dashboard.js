@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
 import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
-import { addToUpdateQueue, appLogin, initThing, loadFromDataset, nameFilter, SaveState, setAttr } from "solid-core/dist/pods";
+import { addToUpdateQueue, appLogin, initThing, loadAllByName, SaveState, setAttr } from "solid-core/dist/pods";
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
@@ -12,9 +12,9 @@ import MovieDetail from "./MovieDetail";
 import MovieList from "./MovieList/MovieList";
 import Search from "./Search";
 
-const Dashboard = ({ user, data }) => {
+const Dashboard = ({ user }) => {
 
-  const { queue, updateQueue, saveFromQ, dataset } = useContext(SaveState);
+  const { queue, updateQueue, saveFromQ, dataset, setDataset } = useContext(SaveState);
   const { mui } = useContext(AppTheme);
 
   const [loading, setLoading] = useState(false);
@@ -22,23 +22,13 @@ const Dashboard = ({ user, data }) => {
   const [detail, setDetail] = useState(null);
 
   useEffect(() => {
-    if (!data || !dataset) return;
+    if (!dataset) return;
     setLoading(true);
-    (async function (things) {
-      // GET ALL MOVIE DATA
-      return await Promise.all(
-        things
-          .filter(nameFilter('movie'))
-          .map(t => loadFromDataset(dataset, t.url, movieShape))
-      );
-    })(data)
-      .then(loadAllMovieData)
+    loadAllMovieData(loadAllByName(dataset, 'movie', movieShape))
       .then(updateMovies)
-  }, [data, dataset]);
+  }, [dataset]);
 
   useEffect(() => setLoading(false), [movies])
-
-
 
   async function loadAllMovieData(list) {
     // GET ALL MOVIE DATA
@@ -58,8 +48,9 @@ const Dashboard = ({ user, data }) => {
   async function addMovie(id) {
     let data = await getMovieData(id);
     let movie = { id, data, rating: {}, tags: [] };
-    movie = await initThing("movie", movie, movieShape)
+    { dataset, movie } = await initThing("movie", movie, movieShape)
     updateMovies([...movies, { ...movie, data }]);
+    setDataset(dataset)
   }
 
   function updateMovie(field, then) {
