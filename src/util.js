@@ -18,7 +18,8 @@ export const SEARCH_DELAY = 500;
 export const DECIMAL = 1;
 
 export function overallScore(rating, sigDigits = DECIMAL) {
-  if (!rating.story
+  if (!rating
+    || !rating.story
     || !rating.character
     || !rating.performance
     || !rating.visuals
