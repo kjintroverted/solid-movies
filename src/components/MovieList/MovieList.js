@@ -24,6 +24,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
   const [tagFilter, setTagFilter] = useState('')
   const [genreFilter, setGenreFilter] = useState('')
   const [yearFilter, setYearFilter] = useState('')
+  const [titleFilter, setTitleFilter] = useState('')
 
   useEffect(() => {
     setList(movies
@@ -36,6 +37,8 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         || m.data.Genre.split(', ').findIndex(t => t.toLowerCase().indexOf(genreFilter.toLowerCase()) >= 0) >= 0)
       .filter(m => !yearFilter
         || m.data.Year.indexOf(yearFilter) === 0)
+      .filter(m => !titleFilter
+        || m.data.Title.toLowerCase().indexOf(titleFilter.toLowerCase()) === 0)
       .sort(sortFunction(factor)))
   }, [
     movies,
@@ -43,6 +46,7 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
     genreFilter,
     yearFilter,
     rateFilter,
+    titleFilter,
     sortFunction,
     factor
   ])
@@ -83,14 +87,23 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
 
         {/* FILTERS */ }
         <Background>
+          <TextField fullWidth placeholder='find movie' onChange={ e => setTitleFilter(e.target.value) } />
+        </Background>
+        <Background>
           <TextField fullWidth placeholder='filter by tag' onChange={ e => setTagFilter(e.target.value) } />
         </Background>
-        <Background>
-          <TextField fullWidth placeholder='filter by genre' onChange={ e => setGenreFilter(e.target.value) } />
-        </Background>
-        <Background>
-          <TextField fullWidth placeholder='filter by year' onChange={ e => setYearFilter(e.target.value) } />
-        </Background>
+        {
+          window.innerWidth > 680
+          &&
+          <>
+            <Background>
+              <TextField fullWidth placeholder='filter by genre' onChange={ e => setGenreFilter(e.target.value) } />
+            </Background>
+            <Background>
+              <TextField fullWidth placeholder='filter by year' onChange={ e => setYearFilter(e.target.value) } />
+            </Background>
+          </>
+        }
 
         <Button
           variant="outlined"
