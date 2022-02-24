@@ -16,11 +16,15 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
 
   const [displayList, setList] = useState([])
   const [focus, setFocus] = useState(null)
-  const [tagFilter, setTagFilter] = useState('')
   const [rateFilter, setRateFilter] = useState(0)
   const [factor, setFactor] = useState(1)
   const [sortFunction, setSortFunction] = useState(() => sortRating)
   const [gridView, setGridView] = useState(true)
+  // FILTERS
+  const [tagFilter, setTagFilter] = useState('')
+  const [genreFilter, setGenreFilter] = useState('')
+  const [yearFilter, setYearFilter] = useState('')
+  const [titleFilter, setTitleFilter] = useState('')
 
   useEffect(() => {
     setList(movies
@@ -29,8 +33,23 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
         || (rateFilter === 2 && !!overallScore(m.rating)))
       .filter(m => !tagFilter
         || m.tags.findIndex(t => t.toLowerCase().indexOf(tagFilter.toLowerCase()) >= 0) >= 0)
+      .filter(m => !genreFilter
+        || m.data.Genre.split(', ').findIndex(t => t.toLowerCase().indexOf(genreFilter.toLowerCase()) >= 0) >= 0)
+      .filter(m => !yearFilter
+        || m.data.Year.indexOf(yearFilter) === 0)
+      .filter(m => !titleFilter
+        || m.data.Title.toLowerCase().indexOf(titleFilter.toLowerCase()) === 0)
       .sort(sortFunction(factor)))
-  }, [movies, tagFilter, rateFilter, sortFunction, factor])
+  }, [
+    movies,
+    tagFilter,
+    genreFilter,
+    yearFilter,
+    rateFilter,
+    titleFilter,
+    sortFunction,
+    factor
+  ])
 
   function addTag(movie) {
     return (tag) => {
@@ -65,9 +84,27 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
       <Spacer height='1em' />
       <Row width='90%' align='center'>
         <Spacer />
+
+        {/* FILTERS */ }
+        <Background>
+          <TextField fullWidth placeholder='find movie' onChange={ e => setTitleFilter(e.target.value) } />
+        </Background>
         <Background>
           <TextField fullWidth placeholder='filter by tag' onChange={ e => setTagFilter(e.target.value) } />
         </Background>
+        {
+          window.innerWidth > 680
+          &&
+          <>
+            <Background>
+              <TextField fullWidth placeholder='filter by genre' onChange={ e => setGenreFilter(e.target.value) } />
+            </Background>
+            <Background>
+              <TextField fullWidth placeholder='filter by year' onChange={ e => setYearFilter(e.target.value) } />
+            </Background>
+          </>
+        }
+
         <Button
           variant="outlined"
           color='secondary'
@@ -128,6 +165,6 @@ const Background = styled.div`
   margin: 0em .3em;
   border-radius: .3em;
   width: 30%;
-  min-width: 200px;
-  max-width: 30em;
+  min-width: 100px;
+  max-width: 10em;
 `
