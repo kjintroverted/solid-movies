@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
 import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
-import { addToUpdateQueue, appLogin, initThing, loadAllByName, SaveState, setAttr } from "solid-core/dist/pods";
+import { addToUpdateQueue, appLogin, deleteThing, initThing, loadAllByName, SaveState, setAttr } from "solid-core/dist/pods";
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
@@ -49,10 +49,17 @@ const Dashboard = ({ user }) => {
     let data = await getMovieData(id);
     let movie = { id, data, rating: {}, tags: [] };
     let dataset
-    debugger
     ({ dataset, thing: movie } = await initThing("movie", movie, movieShape))
     updateMovies([...movies, { ...movie, data }]);
     setDataset(dataset)
+  }
+
+  async function deleteMovie(movie) {
+    let { dataset } = await deleteThing(movie.thing)
+    let i = movies.findIndex(m => m.thing.url === movie.thing.url)
+    updateMovies([...movies.slice(0, i), ...movies.slice(i + 1)])
+    setDataset(dataset)
+    setDetail(null)
   }
 
   function updateMovie(field, then) {
@@ -63,6 +70,13 @@ const Dashboard = ({ user }) => {
       let i = movies.findIndex(m => m.id === updatedMovie.id);
       updateMovies([...movies.slice(0, i), updatedMovie, ...movies.slice(i + 1)])
       if (then) then(updatedMovie);
+    }
+  }
+
+  function deleteRating(m) {
+    return async e => {
+      e.stopPropagation();
+      await deleteMovie(m)
     }
   }
 
@@ -84,7 +98,11 @@ const Dashboard = ({ user }) => {
         <Search idList={ movies.map(m => m.id) } add={ addMovie } />
         <MovieList movies={ movies } onSelect={ setDetail } onUpdate={ updateMovie('tags') } />
         <Loading loading={ loading } />
-        <MovieDetail movie={ detail } onUpdate={ updateMovie('rating', setDetail) } handleClose={ () => setDetail(null) } />
+        <MovieDetail
+          movie={ detail }
+          onUpdate={ updateMovie('rating', setDetail) }
+          handleClose={ () => setDetail(null) }
+          onDelete={ deleteRating } />
       </Content>
       <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
     </Layout>
