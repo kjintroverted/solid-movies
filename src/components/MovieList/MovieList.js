@@ -151,7 +151,6 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
             openRating={ openRating }
             changeSort={ setSortFunction }
           />
-
       }
     </Column>
   )
@@ -160,11 +159,11 @@ const MovieList = ({ movies, onSelect, onUpdate }) => {
 export default MovieList;
 
 const Background = styled.div`
-  background: ${ THEME.dark }DD;
-  padding: .2em;
-  margin: 0em .3em;
-  border-radius: .3em;
-  width: 30%;
-  min-width: 100px;
-  max-width: 10em;
-`
+      background: ${ THEME.dark }DD;
+      padding: .2em;
+      margin: 0em .3em;
+      border-radius: .3em;
+      width: 30%;
+      min-width: 100px;
+      max-width: 10em;
+      `

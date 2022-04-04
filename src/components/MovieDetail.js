@@ -1,11 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import { useState } from "react";
-import { Frame, Spacer } from "solid-core/dist/components/styled";
+import { Frame, Row, Spacer } from "solid-core/dist/components/styled";
 import styled from "styled-components";
 import { overallScore, THEME } from "../util";
 import Scales from "./Scales";
 
-const MovieDetail = ({ movie, onUpdate, handleClose }) => {
+const MovieDetail = ({ movie, onUpdate, handleClose, onDelete }) => {
 
   const [show, setShow] = useState(true);
 
@@ -37,8 +37,12 @@ const MovieDetail = ({ movie, onUpdate, handleClose }) => {
         </Ratings>
       </DialogContent>
       <DialogActions>
-        <Button onClick={ () => setShow(!show) }>{ show ? 'Hide' : 'Show' } Explanation</Button>
-        <Button variant='contained' color='secondary' href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
+        <Row>
+          <Button color="secondary" onClick={ onDelete(movie) }>Delete</Button>
+          <Spacer />
+          <Button onClick={ () => setShow(!show) }>{ show ? 'Hide' : 'Show' } Explanation</Button>
+          <Button variant='contained' color='secondary' href={ `https://www.imdb.com/title/${ movie.id }` }>More INfo</Button>
+        </Row>
       </DialogActions>
     </Dialog>
   )
