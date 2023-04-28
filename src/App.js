@@ -41,7 +41,7 @@ function App() {
       await handleIncomingRedirect()
       let { info } = getDefaultSession()
       if (info.isLoggedIn) setUser(info.webId)
-      else await appLogin()
+      // else await appLogin()
     }
     getUser()
   }, [])
@@ -76,7 +76,7 @@ function App() {
           <Main>
             <Router>
               <Routes>
-                <Route path="/" element={ <Dashboard user={ profile } /> } />
+                <Route path="/" element={ <Dashboard login={async () => await appLogin()} user={ profile } /> } />
                 <Route path="/profile"
                   element={
                     <SaveState.Consumer>

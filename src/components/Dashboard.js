@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SaveButton from "solid-core/dist/components/SaveButton";
 import { HeaderBar, Spacer } from "solid-core/dist/components/styled";
-import { addToUpdateQueue, appLogin, deleteThing, initThing, loadAllByName, SaveState, setAttr } from "solid-core/dist/pods";
+import { addToUpdateQueue, deleteThing, initThing, loadAllByName, SaveState, setAttr } from "solid-core/dist/pods";
 import styled from "styled-components";
 import { movieShape } from "../movieShape";
 import { AppTheme, getMovieData, THEME } from "../util";
@@ -12,7 +12,7 @@ import MovieDetail from "./MovieDetail";
 import MovieList from "./MovieList/MovieList";
 import Search from "./Search";
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, login }) => {
 
   const { queue, updateQueue, saveFromQ, dataset, setDataset } = useContext(SaveState);
   const { mui } = useContext(AppTheme);
@@ -91,7 +91,7 @@ const Dashboard = ({ user }) => {
               <IconButton color="inherit"><span className="material-icons">person</span></IconButton>
             </Link>
             :
-            <Button onClick={ appLogin } color="inherit">Login</Button>
+            <Button onClick={ login } color="inherit">Login</Button>
         }
       </HeaderBar>
       <Content>
