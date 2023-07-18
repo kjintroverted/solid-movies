@@ -82,8 +82,8 @@ const Dashboard = ({ user, login }) => {
 
   return (
     <Layout>
-      <HeaderBar theme={ THEME }>
-        <h2>{ user && user.nickname ? `${ user.nickname }'s` : user && user.name ? `${ user.name }'s` : "My" } Movies</h2>
+      <HeaderBar theme={THEME}>
+        <h2>{user && user.nickname ? `${user.nickname}'s` : user && user.name ? `${user.name}'s` : "My"} Movies</h2>
         <Spacer />
         {
           user ?
@@ -91,20 +91,26 @@ const Dashboard = ({ user, login }) => {
               <IconButton color="inherit"><span className="material-icons">person</span></IconButton>
             </Link>
             :
-            <Button onClick={ login } color="inherit">Login</Button>
+            <Button onClick={login} color="inherit">Login</Button>
         }
       </HeaderBar>
       <Content>
-        <Search idList={ movies.map(m => m.id) } add={ addMovie } />
-        <MovieList movies={ movies } onSelect={ setDetail } onUpdate={ updateMovie('tags') } />
-        <Loading loading={ loading } />
+        {
+          (movies && movies.length) ?
+            (<>
+              <Search idList={movies.map(m => m.id)} add={addMovie} />
+              <MovieList movies={movies} onSelect={setDetail} onUpdate={updateMovie('tags')} />
+            </>)
+            : <Welcome>Log in to get started!</Welcome>
+        }
+        <Loading loading={loading} />
         <MovieDetail
-          movie={ detail }
-          onUpdate={ updateMovie('rating', setDetail) }
-          handleClose={ () => setDetail(null) }
-          onDelete={ deleteRating } />
+          movie={detail}
+          onUpdate={updateMovie('rating', setDetail)}
+          handleClose={() => setDetail(null)}
+          onDelete={deleteRating} />
       </Content>
-      <SaveButton ui={ mui } save={ saveFromQ } queue={ queue } />
+      <SaveButton ui={mui} save={saveFromQ} queue={queue} />
     </Layout>
   )
 }
@@ -112,7 +118,7 @@ const Dashboard = ({ user, login }) => {
 export default Dashboard;
 
 const Layout = styled.div`
-  background: ${ THEME.light };
+  background: ${THEME.light};
   height: 100%;
   display: grid;
   grid-template-rows: 5.2em 1fr;
@@ -122,8 +128,12 @@ const Layout = styled.div`
   `
 
 const Content = styled.div`
-  background: ${ THEME.light };
+  background: ${THEME.light};
   display: flex;
   flex-direction: column;
   grid-area: main;
+`
+const Welcome = styled.h3`
+  color: ${THEME.dark};
+  text-align: center;
 `
